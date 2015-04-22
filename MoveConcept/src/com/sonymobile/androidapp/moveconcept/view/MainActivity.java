@@ -80,7 +80,7 @@ public class MainActivity extends Activity {
 
             @Override
             public void onReceive(Context context, Intent intent) {
-                Log.i("SmartMotion", "Receiving");
+                Log.i("SmartMotion", "ReceivingFromActivity");
                 mTimer.setText("Notification!!!");
             }
 
@@ -101,8 +101,10 @@ public class MainActivity extends Activity {
     protected void onStop() {
         super.onStop();
         if (mBound) {
+            Log.i("SmartMotion", "Unbinding...");
             unbindService(mConnection);
             mBound = false;
+            startService(new Intent(ApplicationData.getAppContext(), MoveService.class));
         }
     }
 
@@ -135,7 +137,6 @@ public class MainActivity extends Activity {
         @Override
         public void onServiceDisconnected(ComponentName name) {
             mBound = false;
-
         }
 
         @Override
