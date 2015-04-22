@@ -29,8 +29,20 @@ public class Constants {
     public static final int NOTIFICATION_START_MOVING = 0x01;
 
     /**
+     * Settings Constants
+     */
+    public static final int SCHEDULE_ALARM_REQUEST_CODE = 10000;
+
+    /**
      * Constants
      */
     public static final long IDLE_LIMIT = 5 * 1000;
+
+    /**
+     * General Intents
+     */
+    public static final String PACKAGE_NAME = "com.sonymobile.androidapp.moveconcept";
+
+    public static final String START_MOVE_ALARM = PACKAGE_NAME + ".action.START_MOVE_ALARM";
 
 }

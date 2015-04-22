@@ -2,12 +2,15 @@
 package com.sonymobile.androidapp.moveconcept.view;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -18,6 +21,7 @@ import com.sonymobile.androidapp.moveconcept.persistence.ApplicationData;
 import com.sonymobile.androidapp.moveconcept.service.MoveListener;
 import com.sonymobile.androidapp.moveconcept.service.MoveService;
 import com.sonymobile.androidapp.moveconcept.service.MoveService.LocalBinder;
+import com.sonymobile.androidapp.moveconcept.utils.Constants;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -38,6 +42,8 @@ public class MainActivity extends Activity {
     MoveService mService;
 
     boolean mBound = false;
+
+    BroadcastReceiver mReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,12 +70,24 @@ public class MainActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-                if (mBound) {
+                if (mBound && mService.isAlarmUp()) {
                     mService.cancelAlarms(getApplicationContext());
+                    mTimer.setText("Alarm Cancelled");
                 }
             }
         });
+        mReceiver = new BroadcastReceiver() {
 
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Log.i("SmartMotion", "Receiving");
+                mTimer.setText("Notification!!!");
+            }
+
+        };
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Constants.START_MOVE_ALARM);
+        registerReceiver(mReceiver, filter);
     }
 
     @Override
@@ -90,6 +108,7 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onPause() {
+        unregisterReceiver(mReceiver);
         super.onPause();
     }
 
@@ -127,4 +146,5 @@ public class MainActivity extends Activity {
             mService.addMoveListener(moveListener);
         }
     };
+
 }

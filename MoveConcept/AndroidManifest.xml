@@ -27,7 +27,11 @@
             android:enabled="true"
             android:exported="false"/>        
         
-        <receiver android:name=".receiver.MoveReceiver">
+        <receiver android:name=".receiver.MoveReceiver"
+            android:enabled="true">
+            <intent-filter >
+            	<action android:name="com.sonymobile.androidapp.moveconcept.action.START_MOVE_ALARM" />
+        	</intent-filter>
         </receiver>
         
         <activity

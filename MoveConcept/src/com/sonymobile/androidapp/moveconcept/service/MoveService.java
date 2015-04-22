@@ -38,7 +38,7 @@ public class MoveService extends Service implements SensorEventListener {
 
     private long mLastShake = 0;
 
-    MoveReceiver mAlarmMove = new MoveReceiver();
+    private boolean mAlarmUp = false;
 
     final public static String ONE_TIME = "onetime";
 
@@ -73,7 +73,6 @@ public class MoveService extends Service implements SensorEventListener {
         mSensorAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         mSensorManager.registerListener(this, mSensorAccelerometer,
                 SensorManager.SENSOR_DELAY_NORMAL);
-        Log.i("SmartMotion", "NEW SERVICE");
         super.onCreate();
     }
 
@@ -127,15 +126,18 @@ public class MoveService extends Service implements SensorEventListener {
 
     }
 
-    public long setAlarms(Context context) {
+    public void setAlarms(Context context) {
         AlarmManager moveAlarm = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-        PendingIntent pendingIntent = createPendingIntent(context, ONE_TIME);
+        Intent intent = new Intent(Constants.START_MOVE_ALARM);
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context,
+                Constants.SCHEDULE_ALARM_REQUEST_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
         moveAlarm.set(AlarmManager.RTC_WAKEUP, (System.currentTimeMillis() + Constants.IDLE_LIMIT),
                 pendingIntent);
         notifyMovement(System.currentTimeMillis() + Constants.IDLE_LIMIT);
-
+        mAlarmUp = true;
         Log.i("SmartMotion", "Setting Alarm");
-        return System.currentTimeMillis() + Constants.IDLE_LIMIT;
 
     }
 
@@ -143,14 +145,22 @@ public class MoveService extends Service implements SensorEventListener {
         AlarmManager moveAlarm = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         PendingIntent pendingIntent = createPendingIntent(context, ONE_TIME);
         moveAlarm.cancel(pendingIntent);
+        mAlarmUp = true;
         Log.i("SmartMotion", "RemovingAlarm");
+    }
 
+    public boolean isAlarmUp() {
+        return mAlarmUp;
+    }
+
+    public void setAlarmUp(boolean mAlarmUp) {
+        this.mAlarmUp = mAlarmUp;
     }
 
     private PendingIntent createPendingIntent(Context context, String string) {
         Intent intent = new Intent(context, MoveReceiver.class);
         intent.putExtra(ONE_TIME, Boolean.FALSE);
-        return PendingIntent.getBroadcast(context, 0, intent, 0);
+        return PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
     public void notifyMovement(long moveTimer) {
