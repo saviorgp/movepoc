@@ -31,6 +31,6 @@ public class Constants {
     /**
      * Constants
      */
-    public static final long IDLE_LIMIT = 30 * 1000;
+    public static final long IDLE_LIMIT = 5 * 1000;
 
 }

@@ -8,6 +8,8 @@
         android:minSdkVersion="14"
         android:targetSdkVersion="21" />
 
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    
     <application
         android:name=".persistence.ApplicationData"
         android:allowBackup="true"
@@ -19,6 +21,14 @@
             android:name=".service.CompareIdleTimeService"
             android:enabled="true"
             android:exported="false"/>
+        
+        <service 
+            android:name=".service.MoveService"
+            android:enabled="true"
+            android:exported="false"/>        
+        
+        <receiver android:name=".receiver.MoveReceiver">
+        </receiver>
         
         <activity
             android:name="com.sonymobile.androidapp.moveconcept.view.MainActivity"

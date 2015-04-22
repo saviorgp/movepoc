@@ -9,6 +9,11 @@ import com.sonymobile.androidapp.moveconcept.persistence.SharedPreferencesHelper
 import java.util.Date;
 import java.util.TimerTask;
 
+/**
+ * @file TimerCount.java
+ * @author Gabriel Gonçalves (gabriel.goncalves@venturus.org.br)
+ * @created 16/04/2015
+ */
 public class TimerCount extends TimerTask {
 
     SharedPreferencesHelper prefs = ApplicationData.getSharedPreferences();
