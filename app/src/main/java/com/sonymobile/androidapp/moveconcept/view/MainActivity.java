@@ -28,7 +28,7 @@ import java.util.Date;
 
 /**
  * @file MainActivity.java
- * @author Gabriel Gonçalves (gabriel.goncalves@venturus.org.br)
+ * @author Gabriel Gonï¿½alves (gabriel.goncalves@venturus.org.br)
  * @created 16/04/2015
  */
 public class MainActivity extends Activity {
@@ -76,18 +76,7 @@ public class MainActivity extends Activity {
                 }
             }
         });
-        mReceiver = new BroadcastReceiver() {
 
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                Log.i("SmartMotion", "ReceivingFromActivity");
-                mTimer.setText("Notification!!!");
-            }
-
-        };
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(Constants.START_MOVE_ALARM);
-        registerReceiver(mReceiver, filter);
     }
 
     @Override
@@ -110,13 +99,27 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onPause() {
-        unregisterReceiver(mReceiver);
+        if (mBound){
+            unregisterReceiver(mReceiver);
+        }
         super.onPause();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        mReceiver = new BroadcastReceiver() {
+
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Log.i("SmartMotion", "ReceivingFromActivity");
+                mTimer.setText("Notification!!!");
+            }
+
+        };
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Constants.START_MOVE_ALARM);
+        registerReceiver(mReceiver, filter);
     }
 
     public MoveListener moveListener = new MoveListener() {
