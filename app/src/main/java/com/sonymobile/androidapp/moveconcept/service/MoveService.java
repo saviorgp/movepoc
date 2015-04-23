@@ -1,4 +1,12 @@
 
+/*
+ * *
+ *  * @file ApplicationData.java
+ *  * @author Gabriel Goncalves (gabriel.goncalves@venturus.org.br)
+ *  * @created 14/04/2015
+ *
+ */
+
 package com.sonymobile.androidapp.moveconcept.service;
 
 import android.app.AlarmManager;
@@ -143,9 +151,13 @@ public class MoveService extends Service implements SensorEventListener {
 
     public void cancelAlarms(Context context) {
         AlarmManager moveAlarm = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-        PendingIntent pendingIntent = createPendingIntent(context, ONE_TIME);
+        Intent intent = new Intent(Constants.START_MOVE_ALARM);
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context,
+                Constants.SCHEDULE_ALARM_REQUEST_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
         moveAlarm.cancel(pendingIntent);
-        mAlarmUp = true;
+        mAlarmUp = false;
         Log.i("SmartMotion", "RemovingAlarm");
     }
 
