@@ -20,4 +20,7 @@ android {
 
 dependencies {
     compile 'com.android.support:support-v4:21.0.3'
+    compile files ('libs/SmartMotionAPI.jar')
+    compile files ('libs/SmartExtensionAPI.jar')
+    compile files ('libs/SmartExtensionUtils.jar')
 }
