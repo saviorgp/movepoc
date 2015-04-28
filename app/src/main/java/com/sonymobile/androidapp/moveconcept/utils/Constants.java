@@ -3,7 +3,7 @@ package com.sonymobile.androidapp.moveconcept.utils;
 
 /**
  * @file Constants.java
- * @author Gabriel Gonçalves (gabriel.goncalves@venturus.org.br)
+ * @author Gabriel Gonï¿½alves (gabriel.goncalves@venturus.org.br)
  * @created 14/04/2015
  */
 public class Constants {
@@ -36,7 +36,7 @@ public class Constants {
     /**
      * Constants
      */
-    public static final long IDLE_LIMIT = 5 * 1000;
+    public static final long IDLE_LIMIT = 30 * 1000;
 
     /**
      * General Intents

@@ -1,6 +1,6 @@
 <component name="CopyrightManager">
   <copyright>
-    <option name="notice" value="/**&#13;&#10; * @file ApplicationData.java&#13;&#10; * @author Gabriel Goncalves (gabriel.goncalves@venturus.org.br)&#13;&#10; * @created 14/04/2015&#13;&#10; */" />
+    <option name="notice" value="@file &amp;#36;{NAME}&#13;&#10;@author Gabriel Gonçalves (gabriel.goncalves@venturus.org.br)&#13;&#10;@created &amp;#36;{DATE}" />
     <option name="keyword" value="Copyright" />
     <option name="allowReplaceKeyword" value="" />
     <option name="myName" value="Gabriel Venturus" />

@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.sonymobile.androidapp.moveconcept.R;
+import com.sonymobile.androidapp.moveconcept.liveware.control.view.MoveMotionListener;
 import com.sonymobile.androidapp.moveconcept.persistence.ApplicationData;
 import com.sonymobile.androidapp.moveconcept.service.MoveListener;
 import com.sonymobile.androidapp.moveconcept.service.MoveService;
@@ -24,26 +25,25 @@ import com.sonymobile.androidapp.moveconcept.service.MoveService.LocalBinder;
 import com.sonymobile.androidapp.moveconcept.utils.Constants;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 
 /**
- * @file MainActivity.java
  * @author Gabriel Gon�alves (gabriel.goncalves@venturus.org.br)
+ * @file MainActivity.java
  * @created 16/04/2015
  */
 public class MainActivity extends Activity {
 
-    private TextView mTimer;
-
-    private Button mSetAlarm;
-
-    private Button mCancelAlarm;
-
     MoveService mService;
+    BroadcastReceiver mReceiver;
 
+    private TextView mTimer;
+    private Button mSetAlarm;
+    private Button mCancelAlarm;
     boolean mBound = false;
 
-    BroadcastReceiver mReceiver;
+    public static MoveMotionListener mListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +51,9 @@ public class MainActivity extends Activity {
 
         setContentView(R.layout.activity_main);
 
-        mTimer = (TextView)findViewById(R.id.timer);
-        mSetAlarm = (Button)findViewById(R.id.btn_set_alarm);
-        mCancelAlarm = (Button)findViewById(R.id.btn_cancel_alarm);
+        mTimer = (TextView) findViewById(R.id.timer);
+        mSetAlarm = (Button) findViewById(R.id.btn_set_alarm);
+        mCancelAlarm = (Button) findViewById(R.id.btn_cancel_alarm);
 
         mSetAlarm.setOnClickListener(new OnClickListener() {
 
@@ -62,7 +62,6 @@ public class MainActivity extends Activity {
                 if (mBound) {
                     mService.setAlarms(getApplicationContext());
                 }
-
             }
         });
 
@@ -99,7 +98,7 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onPause() {
-        if (mBound){
+        if (mBound) {
             unregisterReceiver(mReceiver);
         }
         super.onPause();
@@ -114,6 +113,10 @@ public class MainActivity extends Activity {
             public void onReceive(Context context, Intent intent) {
                 Log.i("SmartMotion", "ReceivingFromActivity");
                 mTimer.setText("Notification!!!");
+                switch (intent.getExtras().getInt(MoveMotionListener.EXTRA_STATE, 0)){
+                    case MoveMotionListener.STATE_STARTED_CAPTURE:
+                     Log.i("SmartMotion", ": onReceive... STATE_STARTED_CAPTURE");
+                }
             }
 
         };
@@ -144,7 +147,7 @@ public class MainActivity extends Activity {
 
         @Override
         public void onServiceConnected(ComponentName className, IBinder service) {
-            LocalBinder binder = (LocalBinder)service;
+            LocalBinder binder = (LocalBinder) service;
             mService = binder.getService();
             mBound = true;
             mService.addMoveListener(moveListener);

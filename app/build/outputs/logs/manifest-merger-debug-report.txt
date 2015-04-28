@@ -28,60 +28,152 @@ uses-permission#android.permission.RECEIVE_BOOT_COMPLETED
 ADDED from AndroidManifest.xml:11:5
 	android:name
 		ADDED from AndroidManifest.xml:11:22
+uses-permission#com.sonyericsson.extras.liveware.aef.EXTENSION_PERMISSION
+ADDED from AndroidManifest.xml:14:5
+	android:name
+		ADDED from AndroidManifest.xml:14:22
 application
-ADDED from AndroidManifest.xml:13:5
+ADDED from AndroidManifest.xml:16:5
 MERGED from com.android.support:support-v4:21.0.3:16:5
 	android:label
-		ADDED from AndroidManifest.xml:17:9
+		ADDED from AndroidManifest.xml:20:9
 	android:allowBackup
-		ADDED from AndroidManifest.xml:15:9
-	android:icon
-		ADDED from AndroidManifest.xml:16:9
-	android:theme
 		ADDED from AndroidManifest.xml:18:9
+	android:icon
+		ADDED from AndroidManifest.xml:19:9
+	android:theme
+		ADDED from AndroidManifest.xml:21:9
 	android:name
-		ADDED from AndroidManifest.xml:14:9
+		ADDED from AndroidManifest.xml:17:9
 service#com.sonymobile.androidapp.moveconcept.service.CompareIdleTimeService
-ADDED from AndroidManifest.xml:20:9
+ADDED from AndroidManifest.xml:23:9
 	android:enabled
-		ADDED from AndroidManifest.xml:22:13
+		ADDED from AndroidManifest.xml:25:13
 	android:exported
-		ADDED from AndroidManifest.xml:23:13
-	android:name
-		ADDED from AndroidManifest.xml:21:13
-service#com.sonymobile.androidapp.moveconcept.service.MoveService
-ADDED from AndroidManifest.xml:25:9
-	android:enabled
-		ADDED from AndroidManifest.xml:27:13
-	android:exported
-		ADDED from AndroidManifest.xml:28:13
-	android:name
 		ADDED from AndroidManifest.xml:26:13
-receiver#com.sonymobile.androidapp.moveconcept.receiver.MoveReceiver
-ADDED from AndroidManifest.xml:30:9
+	android:name
+		ADDED from AndroidManifest.xml:24:13
+service#com.sonymobile.androidapp.moveconcept.service.MoveService
+ADDED from AndroidManifest.xml:28:9
 	android:enabled
+		ADDED from AndroidManifest.xml:30:13
+	android:exported
 		ADDED from AndroidManifest.xml:31:13
 	android:name
-		ADDED from AndroidManifest.xml:30:19
-intent-filter#com.sonymobile.androidapp.moveconcept.action.START_MOVE_ALARM
-ADDED from AndroidManifest.xml:32:13
-action#com.sonymobile.androidapp.moveconcept.action.START_MOVE_ALARM
-ADDED from AndroidManifest.xml:33:14
+		ADDED from AndroidManifest.xml:29:13
+service#com.sonymobile.androidapp.moveconcept.liveware.service.MoveExtensionService
+ADDED from AndroidManifest.xml:34:9
+	android:enabled
+		ADDED from AndroidManifest.xml:36:13
 	android:name
-		ADDED from AndroidManifest.xml:33:22
-activity#com.sonymobile.androidapp.moveconcept.view.MainActivity
-ADDED from AndroidManifest.xml:37:9
-	android:label
+		ADDED from AndroidManifest.xml:35:13
+receiver#com.sonymobile.androidapp.moveconcept.liveware.control.MoveExtensionReceiver
+ADDED from AndroidManifest.xml:38:9
+	android:permission
+		ADDED from AndroidManifest.xml:40:13
+	android:name
 		ADDED from AndroidManifest.xml:39:13
-	android:name
-		ADDED from AndroidManifest.xml:38:13
-intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from AndroidManifest.xml:40:13
-action#android.intent.action.MAIN
-ADDED from AndroidManifest.xml:41:17
-	android:name
-		ADDED from AndroidManifest.xml:41:25
-category#android.intent.category.LAUNCHER
+intent-filter#android.intent.action.LOCALE_CHANGED+com.sonyericsson.extras.aef.control.ERROR+com.sonyericsson.extras.aef.control.KEY_EVENT+com.sonyericsson.extras.aef.control.PAUSE+com.sonyericsson.extras.aef.control.RESUME+com.sonyericsson.extras.aef.control.START+com.sonyericsson.extras.aef.control.STOP+com.sonyericsson.extras.aef.control.SWIPE_EVENT+com.sonyericsson.extras.aef.control.TAP_EVENT+com.sonyericsson.extras.aef.control.TOUCH_EVENT+com.sonyericsson.extras.aef.widget.ONTOUCH+com.sonyericsson.extras.aef.widget.START_REFRESH_IMAGE_REQUEST+com.sonyericsson.extras.aef.widget.STOP_REFRESH_IMAGE_REQUEST+com.sonyericsson.extras.liveware.aef.notification.REFRESH_REQUEST+com.sonyericsson.extras.liveware.aef.notification.VIEW_EVENT_DETAIL+com.sonyericsson.extras.liveware.aef.registration.ACCESSORY_CONNECTION+com.sonyericsson.extras.liveware.aef.registration.EXTENSION_REGISTER_REQUEST+com.sonyericsson.extras.liveware.extension.util.widget.scheduled.refresh
+ADDED from AndroidManifest.xml:41:13
+action#com.sonyericsson.extras.liveware.aef.registration.EXTENSION_REGISTER_REQUEST
 ADDED from AndroidManifest.xml:43:17
 	android:name
-		ADDED from AndroidManifest.xml:43:27
+		ADDED from AndroidManifest.xml:43:25
+action#com.sonyericsson.extras.liveware.aef.registration.ACCESSORY_CONNECTION
+ADDED from AndroidManifest.xml:44:17
+	android:name
+		ADDED from AndroidManifest.xml:44:25
+action#android.intent.action.LOCALE_CHANGED
+ADDED from AndroidManifest.xml:45:17
+	android:name
+		ADDED from AndroidManifest.xml:45:25
+action#com.sonyericsson.extras.liveware.aef.notification.VIEW_EVENT_DETAIL
+ADDED from AndroidManifest.xml:47:17
+	android:name
+		ADDED from AndroidManifest.xml:47:25
+action#com.sonyericsson.extras.liveware.aef.notification.REFRESH_REQUEST
+ADDED from AndroidManifest.xml:48:17
+	android:name
+		ADDED from AndroidManifest.xml:48:25
+action#com.sonyericsson.extras.aef.widget.START_REFRESH_IMAGE_REQUEST
+ADDED from AndroidManifest.xml:50:17
+	android:name
+		ADDED from AndroidManifest.xml:50:25
+action#com.sonyericsson.extras.aef.widget.STOP_REFRESH_IMAGE_REQUEST
+ADDED from AndroidManifest.xml:51:17
+	android:name
+		ADDED from AndroidManifest.xml:51:25
+action#com.sonyericsson.extras.aef.widget.ONTOUCH
+ADDED from AndroidManifest.xml:52:17
+	android:name
+		ADDED from AndroidManifest.xml:52:25
+action#com.sonyericsson.extras.liveware.extension.util.widget.scheduled.refresh
+ADDED from AndroidManifest.xml:53:17
+	android:name
+		ADDED from AndroidManifest.xml:53:25
+action#com.sonyericsson.extras.aef.control.START
+ADDED from AndroidManifest.xml:55:17
+	android:name
+		ADDED from AndroidManifest.xml:55:25
+action#com.sonyericsson.extras.aef.control.STOP
+ADDED from AndroidManifest.xml:56:17
+	android:name
+		ADDED from AndroidManifest.xml:56:25
+action#com.sonyericsson.extras.aef.control.PAUSE
+ADDED from AndroidManifest.xml:57:17
+	android:name
+		ADDED from AndroidManifest.xml:57:25
+action#com.sonyericsson.extras.aef.control.RESUME
+ADDED from AndroidManifest.xml:58:17
+	android:name
+		ADDED from AndroidManifest.xml:58:25
+action#com.sonyericsson.extras.aef.control.ERROR
+ADDED from AndroidManifest.xml:59:17
+	android:name
+		ADDED from AndroidManifest.xml:59:25
+action#com.sonyericsson.extras.aef.control.KEY_EVENT
+ADDED from AndroidManifest.xml:60:17
+	android:name
+		ADDED from AndroidManifest.xml:60:25
+action#com.sonyericsson.extras.aef.control.TOUCH_EVENT
+ADDED from AndroidManifest.xml:61:17
+	android:name
+		ADDED from AndroidManifest.xml:61:25
+action#com.sonyericsson.extras.aef.control.SWIPE_EVENT
+ADDED from AndroidManifest.xml:62:17
+	android:name
+		ADDED from AndroidManifest.xml:62:25
+action#com.sonyericsson.extras.aef.control.TAP_EVENT
+ADDED from AndroidManifest.xml:63:17
+	android:name
+		ADDED from AndroidManifest.xml:63:25
+receiver#com.sonymobile.androidapp.moveconcept.receiver.MoveReceiver
+ADDED from AndroidManifest.xml:67:9
+	android:enabled
+		ADDED from AndroidManifest.xml:68:13
+	android:permission
+		ADDED from AndroidManifest.xml:69:13
+	android:name
+		ADDED from AndroidManifest.xml:67:19
+intent-filter#com.sonymobile.androidapp.moveconcept.action.START_MOVE_ALARM
+ADDED from AndroidManifest.xml:70:13
+action#com.sonymobile.androidapp.moveconcept.action.START_MOVE_ALARM
+ADDED from AndroidManifest.xml:71:14
+	android:name
+		ADDED from AndroidManifest.xml:71:22
+activity#com.sonymobile.androidapp.moveconcept.view.MainActivity
+ADDED from AndroidManifest.xml:75:9
+	android:label
+		ADDED from AndroidManifest.xml:77:13
+	android:name
+		ADDED from AndroidManifest.xml:76:13
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from AndroidManifest.xml:78:13
+action#android.intent.action.MAIN
+ADDED from AndroidManifest.xml:79:17
+	android:name
+		ADDED from AndroidManifest.xml:79:25
+category#android.intent.category.LAUNCHER
+ADDED from AndroidManifest.xml:81:17
+	android:name
+		ADDED from AndroidManifest.xml:81:27

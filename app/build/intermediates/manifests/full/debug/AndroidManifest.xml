@@ -10,11 +10,14 @@
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
+    <!-- Liveware Extension Permission -->
+    <uses-permission android:name="com.sonyericsson.extras.liveware.aef.EXTENSION_PERMISSION" />
+
     <application
         android:name="com.sonymobile.androidapp.moveconcept.persistence.ApplicationData"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
+        android:label="@string/MV_APP_NAME"
         android:theme="@style/AppTheme" >
         <service
             android:name="com.sonymobile.androidapp.moveconcept.service.CompareIdleTimeService"
@@ -25,9 +28,44 @@
             android:enabled="true"
             android:exported="false" />
 
+        <!-- LiveWare Extension Service -->
+        <service
+            android:name="com.sonymobile.androidapp.moveconcept.liveware.service.MoveExtensionService"
+            android:enabled="true" />
+
+        <receiver
+            android:name="com.sonymobile.androidapp.moveconcept.liveware.control.MoveExtensionReceiver"
+            android:permission="com.sonyericsson.extras.liveware.aef.HOSTAPP_PERMISSION" >
+            <intent-filter>
+
+                <!-- Generic extension intents. -->
+                <action android:name="com.sonyericsson.extras.liveware.aef.registration.EXTENSION_REGISTER_REQUEST" />
+                <action android:name="com.sonyericsson.extras.liveware.aef.registration.ACCESSORY_CONNECTION" />
+                <action android:name="android.intent.action.LOCALE_CHANGED" />
+                <!-- Notification intents -->
+                <action android:name="com.sonyericsson.extras.liveware.aef.notification.VIEW_EVENT_DETAIL" />
+                <action android:name="com.sonyericsson.extras.liveware.aef.notification.REFRESH_REQUEST" />
+                <!-- Widget intents -->
+                <action android:name="com.sonyericsson.extras.aef.widget.START_REFRESH_IMAGE_REQUEST" />
+                <action android:name="com.sonyericsson.extras.aef.widget.STOP_REFRESH_IMAGE_REQUEST" />
+                <action android:name="com.sonyericsson.extras.aef.widget.ONTOUCH" />
+                <action android:name="com.sonyericsson.extras.liveware.extension.util.widget.scheduled.refresh" />
+                <!-- Control intents -->
+                <action android:name="com.sonyericsson.extras.aef.control.START" />
+                <action android:name="com.sonyericsson.extras.aef.control.STOP" />
+                <action android:name="com.sonyericsson.extras.aef.control.PAUSE" />
+                <action android:name="com.sonyericsson.extras.aef.control.RESUME" />
+                <action android:name="com.sonyericsson.extras.aef.control.ERROR" />
+                <action android:name="com.sonyericsson.extras.aef.control.KEY_EVENT" />
+                <action android:name="com.sonyericsson.extras.aef.control.TOUCH_EVENT" />
+                <action android:name="com.sonyericsson.extras.aef.control.SWIPE_EVENT" />
+                <action android:name="com.sonyericsson.extras.aef.control.TAP_EVENT" />
+            </intent-filter>
+        </receiver>
         <receiver
             android:name="com.sonymobile.androidapp.moveconcept.receiver.MoveReceiver"
-            android:enabled="true" >
+            android:enabled="true"
+            android:permission="com.sonyericsson.extras.liveware.aef.HOSTAPP_PERMISSION" >
             <intent-filter>
                 <action android:name="com.sonymobile.androidapp.moveconcept.action.START_MOVE_ALARM" />
             </intent-filter>
@@ -35,7 +73,7 @@
 
         <activity
             android:name="com.sonymobile.androidapp.moveconcept.view.MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/MV_APP_NAME" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -2,11 +2,11 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\vntgago\SonyProjectsStudio\MoveConcept\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\libs\internal_impl-21.0.3.jar"
+        jar="C:\Users\vntgago\SonyProjectsStudio\MoveConcept\app\libs\SmartMotionAPI.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
-        <dex dex="C:\Users\vntgago\SonyProjectsStudio\MoveConcept\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-4183fba057e2c8585d90bbc2033e9224d2d37535.jar" />
+        sha1="034d6349b739253391e264d1cf39e27f845a29e1">
+        <dex dex="C:\Users\vntgago\SonyProjectsStudio\MoveConcept\app\build\intermediates\pre-dexed\debug\SmartMotionAPI-ad73dc4a174d5da40cfb663758100b93ac1b6d6e.jar" />
     </item>
     <item
         jar="C:\Users\vntgago\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.3\support-annotations-21.0.3.jar"
@@ -16,11 +16,32 @@
         <dex dex="C:\Users\vntgago\SonyProjectsStudio\MoveConcept\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-f718af0e6a3b81f81f08a2dd963aa78bf01e6d83.jar" />
     </item>
     <item
+        jar="C:\Users\vntgago\SonyProjectsStudio\MoveConcept\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\libs\internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="C:\Users\vntgago\SonyProjectsStudio\MoveConcept\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-4183fba057e2c8585d90bbc2033e9224d2d37535.jar" />
+    </item>
+    <item
+        jar="C:\Users\vntgago\SonyProjectsStudio\MoveConcept\app\libs\SmartextEnsionUtils.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="7b0fe1d3012cd2a5e0aa79b851c24d1c3ceba5ef">
+        <dex dex="C:\Users\vntgago\SonyProjectsStudio\MoveConcept\app\build\intermediates\pre-dexed\debug\SmartextEnsionUtils-af6218c0dd5a0188cac03f54929dc6172d9b6044.jar" />
+    </item>
+    <item
         jar="C:\Users\vntgago\SonyProjectsStudio\MoveConcept\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\classes.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
         <dex dex="C:\Users\vntgago\SonyProjectsStudio\MoveConcept\app\build\intermediates\pre-dexed\debug\classes-57dbb24c0d59a47aafaee53b5eb2a254e669b5f0.jar" />
+    </item>
+    <item
+        jar="C:\Users\vntgago\SonyProjectsStudio\MoveConcept\app\libs\SmartExtensionAPI.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="b51c18fa621f45ee3b064086a491bdb3ed607734">
+        <dex dex="C:\Users\vntgago\SonyProjectsStudio\MoveConcept\app\build\intermediates\pre-dexed\debug\SmartExtensionAPI-198d3a10be680a1a7677f7ae343b58e7b8019da8.jar" />
     </item>
 
 </items>
