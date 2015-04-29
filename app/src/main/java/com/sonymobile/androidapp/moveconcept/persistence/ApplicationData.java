@@ -7,7 +7,7 @@ import android.os.AsyncTask;
 
 /**
  * @file ApplicationData.java
- * @author Gabriel Gonçalves (gabriel.goncalves@venturus.org.br)
+ * @author Gabriel Gonï¿½alves (gabriel.goncalves@venturus.org.br)
  * @created 14/04/2015
  */
 public class ApplicationData extends Application {

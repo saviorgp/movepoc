@@ -43,6 +43,7 @@ public class MainActivity extends Activity {
     private Button mSetAlarm;
     private Button mCancelAlarm;
     boolean mBound = false;
+    private float wave[][];
 
     public static MoveMotionListener mListener;
 
@@ -113,14 +114,21 @@ public class MainActivity extends Activity {
             public void onReceive(Context context, Intent intent) {
                 String action = intent.getAction();
                 if (action.equals(MoveExtensionService.EXTENSION_KEY)) {
-                    switch (intent.getExtras().getInt(MoveMotionListener.EXTRA_STATE, 0)) {
-                        case MoveMotionListener.STATE_STOPPED:
-                            Log.i("SmartMotion", ": onReceive... STATE_STOPPED");
-                            break;
+                    //Smartband usage
+                    /*switch (intent.getExtras().getInt(MoveMotionListener.EXTRA_STATE, 0)) {
                         case MoveMotionListener.STATE_STARTED_CAPTURE:
+                            Log.i("SmartMotion", ": onReceive... STATE_STOPPED");
                             mTimer.setText("SmartBand Move");
                             break;
-                    }
+                            case MoveMotionListener.STATE_FINISHED_CAPTURE:
+                            wave[0] = intent.getFloatArrayExtra(MoveMotionListener.EXTRA_WAVE_X);
+                            wave[0] = intent.getExtras().getFloatArray(MoveMotionListener.EXTRA_WAVE_X);
+                            wave[1] = intent.getExtras().getFloatArray(MoveMotionListener.EXTRA_WAVE_Y);
+                            wave[2] = intent.getExtras().getFloatArray(MoveMotionListener.EXTRA_WAVE_Z);
+                            mTimer.setText("X: " + Arrays.toString(wave[0]) + "\nY: " + Arrays.toString(wave[1]) + "\nZ: " + Arrays.toString(wave[2]));
+                            mTimer.setText("X: " + Arrays.toString(wave[0]));
+                            break;
+                    }*/
                 } else if (action.equals(Constants.START_MOVE_ALARM)) {
 
                     Log.i("SmartMotion", "ReceivingFromActivity");

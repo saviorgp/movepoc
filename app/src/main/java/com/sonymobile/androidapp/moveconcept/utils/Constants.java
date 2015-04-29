@@ -36,7 +36,7 @@ public class Constants {
     /**
      * Constants
      */
-    public static final long IDLE_LIMIT = 15 * 1000;
+    public static final long IDLE_LIMIT = 10 * 1000;
 
     /**
      * General Intents

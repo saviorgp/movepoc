@@ -10,7 +10,7 @@ import java.util.Set;
 
 /**
  * @file SharedPreferencesHelper.java
- * @author Gabriel Gonçalves (gabriel.goncalves@venturus.org.br)
+ * @author Gabriel Goncalves (gabriel.goncalves@venturus.org.br)
  * @created 14/04/2015
  */
 

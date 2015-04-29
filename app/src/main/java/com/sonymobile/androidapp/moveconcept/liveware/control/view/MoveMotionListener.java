@@ -30,6 +30,7 @@ public class MoveMotionListener extends SmartMotionListener {
     public static final int STATE_WAITING_CAPTURE = 1;
     public static final int STATE_STARTED_CAPTURE = 2;
     public static final int STATE_WAITING_RESTART = 3;
+    public static final int STATE_FINISHED_CAPTURE = 4;
 
     public static final String EXTRA_STATE = "mCurrentState";
     private static int mCurrentState = STATE_STOPPED;
@@ -63,11 +64,12 @@ public class MoveMotionListener extends SmartMotionListener {
 
         if (mCurrentState == STATE_STARTED_CAPTURE) {
             Log.i("SmartMotion", "SmartMotion Captured");
+            mCurrentState = STATE_FINISHED_CAPTURE;
             intentBroadcast.putExtra(EXTRA_STATE, mCurrentState);
             intentBroadcast.putExtra(EXTRA_WAVE_X, wave[0]);
             intentBroadcast.putExtra(EXTRA_WAVE_Y, wave[1]);
             intentBroadcast.putExtra(EXTRA_WAVE_Z, wave[2]);
-            mContext.sendBroadcast(intentBroadcast);
+            ApplicationData.getAppContext().sendBroadcast(intentBroadcast);
         }
     }
 
@@ -83,7 +85,7 @@ public class MoveMotionListener extends SmartMotionListener {
             case STATE_WAITING_RESTART:
                 Log.d("SmartMotion", CLASS + ": tapAction... STATE_STOPPED | STATE_WAITING_RESTART");
                 if (startSensor()) {
-                    mCurrentState = STATE_WAITING_CAPTURE;
+
                     MainActivity.mListener = this;
                     Log.i("SmartMotion", "Sensor Startado");
                     intentBroadcast.putExtra(EXTRA_STATE, mCurrentState);

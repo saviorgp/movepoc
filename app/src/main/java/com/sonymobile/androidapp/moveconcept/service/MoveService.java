@@ -117,7 +117,6 @@ public class MoveService extends Service implements SensorEventListener {
                     Log.i("SmartMotion", "Set: "
                             + ApplicationData.getSharedPreferences().getStartUnmoving());
                     mLastShake = System.currentTimeMillis();
-                    // mAlarmMove.cancelAlarms(ApplicationData.getAppContext());
                     setAlarms(ApplicationData.getAppContext());
                 }
 

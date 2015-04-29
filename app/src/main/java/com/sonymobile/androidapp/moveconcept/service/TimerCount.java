@@ -11,7 +11,7 @@ import java.util.TimerTask;
 
 /**
  * @file TimerCount.java
- * @author Gabriel Gonçalves (gabriel.goncalves@venturus.org.br)
+ * @author Gabriel Gonï¿½alves (gabriel.goncalves@venturus.org.br)
  * @created 16/04/2015
  */
 public class TimerCount extends TimerTask {
@@ -23,7 +23,6 @@ public class TimerCount extends TimerTask {
         Log.i("SmartMotion", "Timer task started: " + new Date());
         compareTime();
         Log.i("SmartMotion", "Timer task finished: " + new Date());
-
     }
 
     private void compareTime() {
@@ -34,6 +33,5 @@ public class TimerCount extends TimerTask {
             Log.i("SmartMotion", "Notification !!");
             prefs.setStartUnmoving(System.currentTimeMillis());
         }
-
     }
 }

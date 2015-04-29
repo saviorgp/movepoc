@@ -10,9 +10,10 @@
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
-    <!-- Liveware Extension Permission -->
+    <!--
+     Liveware Extension Permission (ONHOLD)
     <uses-permission android:name="com.sonyericsson.extras.liveware.aef.EXTENSION_PERMISSION" />
-
+    -->
     <application
         android:name="com.sonymobile.androidapp.moveconcept.persistence.ApplicationData"
         android:allowBackup="true"
@@ -28,29 +29,33 @@
             android:enabled="true"
             android:exported="false" />
 
-        <!-- LiveWare Extension Service -->
+        <!--
+        &lt;!&ndash; LiveWare Extension Service (ONHOLD) &ndash;&gt;
         <service
-            android:name="com.sonymobile.androidapp.moveconcept.liveware.service.MoveExtensionService"
-            android:enabled="true" />
+            android:name=".liveware.service.MoveExtensionService"
+            android:enabled="true"/>
+        -->
 
+
+        <!--
+        SmartBand ONHOLD)
         <receiver
-            android:name="com.sonymobile.androidapp.moveconcept.liveware.control.MoveExtensionReceiver"
-            android:permission="com.sonyericsson.extras.liveware.aef.HOSTAPP_PERMISSION" >
+            android:name=".liveware.control.MoveExtensionReceiver"
+            android:permission="com.sonyericsson.extras.liveware.aef.HOSTAPP_PERMISSION">
             <intent-filter>
-
-                <!-- Generic extension intents. -->
+                &lt;!&ndash; Generic extension intents.
                 <action android:name="com.sonyericsson.extras.liveware.aef.registration.EXTENSION_REGISTER_REQUEST" />
                 <action android:name="com.sonyericsson.extras.liveware.aef.registration.ACCESSORY_CONNECTION" />
                 <action android:name="android.intent.action.LOCALE_CHANGED" />
-                <!-- Notification intents -->
+                &lt;!&ndash; Notification intents &ndash;&gt;
                 <action android:name="com.sonyericsson.extras.liveware.aef.notification.VIEW_EVENT_DETAIL" />
                 <action android:name="com.sonyericsson.extras.liveware.aef.notification.REFRESH_REQUEST" />
-                <!-- Widget intents -->
+                &lt;!&ndash; Widget intents &ndash;&gt;
                 <action android:name="com.sonyericsson.extras.aef.widget.START_REFRESH_IMAGE_REQUEST" />
                 <action android:name="com.sonyericsson.extras.aef.widget.STOP_REFRESH_IMAGE_REQUEST" />
                 <action android:name="com.sonyericsson.extras.aef.widget.ONTOUCH" />
                 <action android:name="com.sonyericsson.extras.liveware.extension.util.widget.scheduled.refresh" />
-                <!-- Control intents -->
+                &lt;!&ndash; Control intents &ndash;&gt;
                 <action android:name="com.sonyericsson.extras.aef.control.START" />
                 <action android:name="com.sonyericsson.extras.aef.control.STOP" />
                 <action android:name="com.sonyericsson.extras.aef.control.PAUSE" />
@@ -62,10 +67,13 @@
                 <action android:name="com.sonyericsson.extras.aef.control.TAP_EVENT" />
             </intent-filter>
         </receiver>
+        -->
+
         <receiver
             android:name="com.sonymobile.androidapp.moveconcept.receiver.MoveReceiver"
-            android:enabled="true"
-            android:permission="com.sonyericsson.extras.liveware.aef.HOSTAPP_PERMISSION" >
+            android:enabled="true" >
+
+            <!-- android:permission="com.sonyericsson.extras.liveware.aef.HOSTAPP_PERMISSION"> (ONHOLD) -->
             <intent-filter>
                 <action android:name="com.sonymobile.androidapp.moveconcept.action.START_MOVE_ALARM" />
             </intent-filter>
