@@ -41,12 +41,14 @@ public class EllisControlExtension extends ControlExtension {
                 case Control.TapActions.SINGLE_TAP:
                     mMoveService.setAlarms(mContext);
                     Log.i("SmartMotion", "Single Tap !");
-                    mMoveListener.tapAction();
                     break;
                 case Control.TapActions.DOUBLE_TAP:
                     Log.i("SmartMotion", "Double Tap !");
                     mMoveService.cancelAlarms(mContext);
                     break;
+                case Control.TapActions.TRIPLE_TAP:
+                    Log.i("SmartMotion", "Triple Tap !");
+                    mMoveListener.tapAction();
             }
         }
         super.onTap(action, timeStamp);

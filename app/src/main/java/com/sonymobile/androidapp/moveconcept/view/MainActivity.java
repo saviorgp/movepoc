@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.sonymobile.androidapp.moveconcept.R;
 import com.sonymobile.androidapp.moveconcept.liveware.control.view.MoveMotionListener;
+import com.sonymobile.androidapp.moveconcept.liveware.service.MoveExtensionService;
 import com.sonymobile.androidapp.moveconcept.persistence.ApplicationData;
 import com.sonymobile.androidapp.moveconcept.service.MoveListener;
 import com.sonymobile.androidapp.moveconcept.service.MoveService;
@@ -71,7 +72,6 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 if (mBound && mService.isAlarmUp()) {
                     mService.cancelAlarms(getApplicationContext());
-                    mTimer.setText("Alarm Cancelled");
                 }
             }
         });
@@ -111,17 +111,28 @@ public class MainActivity extends Activity {
 
             @Override
             public void onReceive(Context context, Intent intent) {
-                Log.i("SmartMotion", "ReceivingFromActivity");
-                mTimer.setText("Notification!!!");
-                switch (intent.getExtras().getInt(MoveMotionListener.EXTRA_STATE, 0)){
-                    case MoveMotionListener.STATE_STARTED_CAPTURE:
-                     Log.i("SmartMotion", ": onReceive... STATE_STARTED_CAPTURE");
-                }
-            }
+                String action = intent.getAction();
+                if (action.equals(MoveExtensionService.EXTENSION_KEY)) {
+                    switch (intent.getExtras().getInt(MoveMotionListener.EXTRA_STATE, 0)) {
+                        case MoveMotionListener.STATE_STOPPED:
+                            Log.i("SmartMotion", ": onReceive... STATE_STOPPED");
+                            break;
+                        case MoveMotionListener.STATE_STARTED_CAPTURE:
+                            mTimer.setText("SmartBand Move");
+                            break;
+                    }
+                } else if (action.equals(Constants.START_MOVE_ALARM)) {
 
+                    Log.i("SmartMotion", "ReceivingFromActivity");
+                    mTimer.setText("Notification!!!");
+                }
+
+            }
         };
+
         IntentFilter filter = new IntentFilter();
         filter.addAction(Constants.START_MOVE_ALARM);
+        filter.addAction((MoveExtensionService.EXTENSION_KEY));
         registerReceiver(mReceiver, filter);
     }
 
@@ -133,6 +144,12 @@ public class MainActivity extends Activity {
             Date resultDate = new Date(moveTimer);
             mTimer.setText("Next Notification:\n" + simpleDate.format(resultDate));
         }
+
+        @Override
+        public void onAlarmCanceled() {
+            mTimer.setText("Alarm Cancelled");
+        }
+
     };
 
     /**

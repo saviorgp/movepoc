@@ -6,12 +6,12 @@
 
 package com.sonymobile.androidapp.moveconcept.liveware.control;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
+        import android.content.BroadcastReceiver;
+        import android.content.Context;
+        import android.content.Intent;
+        import android.util.Log;
 
-import com.sonymobile.androidapp.moveconcept.liveware.service.MoveExtensionService;
+        import com.sonymobile.androidapp.moveconcept.liveware.service.MoveExtensionService;
 
 /**
  * MoveExtensionReceiver

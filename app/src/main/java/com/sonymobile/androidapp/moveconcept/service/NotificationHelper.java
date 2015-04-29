@@ -5,6 +5,8 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.res.Resources;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.widget.RemoteViews;
 
 import com.sonymobile.androidapp.moveconcept.R;
@@ -29,10 +31,12 @@ public class NotificationHelper {
 
         Notification.Builder builder = new Notification.Builder(context);
 
+        Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
         remoteViews.setCharSequence(R.id.subtitle, "setText", "Move your fat ass !");
 
         builder.setContent(remoteViews).setSmallIcon(R.drawable.ic_launcher)
-                .setTicker("Move your fat ass !").setVibrate(VIBRATE_START_MOVE_NOTIFICATION);
+                .setTicker("Move your fat ass !").setVibrate(VIBRATE_START_MOVE_NOTIFICATION).setSound(uri);
 
         NotificationManager nm = (NotificationManager)context
                 .getSystemService(Context.NOTIFICATION_SERVICE);

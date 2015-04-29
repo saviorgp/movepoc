@@ -135,7 +135,7 @@ public class MoveService extends Service implements SensorEventListener {
     }
 
     public void setAlarms(Context context) {
-        AlarmManager moveAlarm = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+        AlarmManager moveAlarm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(Constants.START_MOVE_ALARM);
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context,
@@ -155,7 +155,7 @@ public class MoveService extends Service implements SensorEventListener {
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context,
                 Constants.SCHEDULE_ALARM_REQUEST_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
+        notifyAlarmCanceled();
         moveAlarm.cancel(pendingIntent);
         mAlarmUp = false;
         Log.i("SmartMotion", "RemovingAlarm");
@@ -178,6 +178,12 @@ public class MoveService extends Service implements SensorEventListener {
     public void notifyMovement(long moveTimer) {
         for (MoveListener listener : mListeners) {
             listener.onMovementChanged(moveTimer);
+        }
+    }
+
+    public void notifyAlarmCanceled (){
+        for (MoveListener listener : mListeners) {
+            listener.onAlarmCanceled();
         }
     }
 

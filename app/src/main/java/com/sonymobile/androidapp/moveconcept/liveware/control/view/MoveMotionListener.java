@@ -32,7 +32,7 @@ public class MoveMotionListener extends SmartMotionListener {
     public static final int STATE_WAITING_RESTART = 3;
 
     public static final String EXTRA_STATE = "mCurrentState";
-    private static int mCurrentState = STATE_WAITING_CAPTURE;
+    private static int mCurrentState = STATE_STOPPED;
     private Context mContext;
     private Intent intentActivity;
     private float waveNewInstance1[][];
@@ -67,13 +67,16 @@ public class MoveMotionListener extends SmartMotionListener {
             intentBroadcast.putExtra(EXTRA_WAVE_X, wave[0]);
             intentBroadcast.putExtra(EXTRA_WAVE_Y, wave[1]);
             intentBroadcast.putExtra(EXTRA_WAVE_Z, wave[2]);
-            ApplicationData.getAppContext().sendBroadcast(intentBroadcast);
+            mContext.sendBroadcast(intentBroadcast);
         }
     }
 
     protected void tapAction() {
         Intent intentBroadcast = new Intent();
         intentBroadcast.setAction(MoveExtensionService.EXTENSION_KEY);
+        Log.d("SmartMotion", CLASS + ": Currentstate: ------- " + mCurrentState );
+        //TODO
+        mCurrentState = STATE_WAITING_CAPTURE;
         switch (mCurrentState) {
             case STATE_STOPPED:
                 Log.d("SmartMotion", CLASS + ": tapAction... STATE_STOPPED");

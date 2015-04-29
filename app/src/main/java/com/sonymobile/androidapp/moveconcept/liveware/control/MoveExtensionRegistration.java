@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * Every supported host application need to be registered
  */
-public class MoveExtensionRegistration extends RegistrationInformation{
+public class MoveExtensionRegistration extends RegistrationInformation {
 
     final Context mContext;
 
@@ -37,7 +37,7 @@ public class MoveExtensionRegistration extends RegistrationInformation{
      * @param context
      */
     public MoveExtensionRegistration(Context context) {
-        if (context == null){
+        if (context == null) {
             throw new IllegalArgumentException("context == null");
         }
         mContext = context;
@@ -66,6 +66,7 @@ public class MoveExtensionRegistration extends RegistrationInformation{
 
     /**
      * Get the extension registration information
+     *
      * @return Registration configuration
      */
     @Override
@@ -86,14 +87,15 @@ public class MoveExtensionRegistration extends RegistrationInformation{
 
     /**
      * Check if host application support any of declared tap actions
+     *
      * @param deviceInfo
      * @return
      */
     @Override
     public boolean isControlDeviceSupported(DeviceInfo deviceInfo) {
 
-        for (TapInfo tapInfo : deviceInfo.getTaps()){
-            if(mTaps.contains(tapInfo.getTapAction())){
+        for (TapInfo tapInfo : deviceInfo.getTaps()) {
+            if (mTaps.contains(tapInfo.getTapAction())) {
                 return true;
             }
         }
