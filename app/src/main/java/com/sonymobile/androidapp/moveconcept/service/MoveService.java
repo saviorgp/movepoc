@@ -36,13 +36,18 @@ public class MoveService extends Service implements SensorEventListener {
 
     private Sensor mSensorAccelerometer;
 
-    private SharedPreferencesHelper prefs;
+    private SharedPreferencesHelper prefs = ApplicationData.getSharedPreferences();
 
-    private long lastUpdate = 0;
+    private long mLastShakeTime = 0;
 
     private float lastx, lasty, lastz;
 
     private static final int SHAKE_THRESHOLD = 400;
+
+    private static final int TIMEOUT_INTERVAL = 100;
+    private static final int TIMEOUT_STEP_FACTOR = 2;
+
+    private static final int GFORCE_THRESHOLD = 2;
 
     private long mLastShake = 0;
 
@@ -51,6 +56,11 @@ public class MoveService extends Service implements SensorEventListener {
     final public static String ONE_TIME = "onetime";
 
     private static Set<MoveListener> mListeners = new HashSet<MoveListener>();
+
+    private int handshakeCounter = 0;
+    private int stepCounter = 0;
+    private long shakeTimeDetected = 0;
+    private long stepTimeDetected = 0;
 
     /**
      * Binder
@@ -77,7 +87,7 @@ public class MoveService extends Service implements SensorEventListener {
 
     @Override
     public void onCreate() {
-        mSensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
+        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mSensorAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         mSensorManager.registerListener(this, mSensorAccelerometer,
                 SensorManager.SENSOR_DELAY_NORMAL);
@@ -99,15 +109,23 @@ public class MoveService extends Service implements SensorEventListener {
             float y = sensorEvent.values[1];
             float z = sensorEvent.values[2];
 
-            long curTime = System.currentTimeMillis();
+            float gravityForce = (x * x + y * y + z * z) / (SensorManager.GRAVITY_EARTH * SensorManager.GRAVITY_EARTH);
 
-            if ((curTime - lastUpdate) > 100) {
-                prefs = ApplicationData.getSharedPreferences();
+            if (gravityForce > GFORCE_THRESHOLD && (System.currentTimeMillis() - mLastShakeTime) > (TIMEOUT_INTERVAL /2 )) {
+                if (System.currentTimeMillis() - shakeTimeDetected > TIMEOUT_INTERVAL && System.currentTimeMillis() - stepTimeDetected > TIMEOUT_INTERVAL * TIMEOUT_STEP_FACTOR) {
+                    if ((y > 15 || y < -15) && (z > -2)) {
+                        shakeTimeDetected = System.currentTimeMillis();
+                        handshakeCounter += 1;
+                        Log.d("SmartMotion", "HandshakeGlobalService.onSensorEvent()... handshakeCounter = " + handshakeCounter);
 
-                long diffTime = (curTime - lastUpdate);
-                lastUpdate = curTime;
+                    } else {
+                        stepTimeDetected = System.currentTimeMillis();
+                        stepCounter += 1;
+                        Log.d("SmartMotion", "HandshakeGlobalService.onSensorEvent()... stepCounter = " + stepCounter);
+                    }
+                }
 
-                float speed = Math.abs(x + y + z - lastx - lasty - lastz) / diffTime * 10000;
+                /*float speed = Math.abs(x + y + z - lastx - lasty - lastz) / diffTime * 10000;
 
                 if (speed > SHAKE_THRESHOLD) {
                     if (mLastShake == 0) {
@@ -119,11 +137,11 @@ public class MoveService extends Service implements SensorEventListener {
                     mLastShake = System.currentTimeMillis();
                     setAlarms(ApplicationData.getAppContext());
                 }
-
                 lastx = x;
                 lasty = y;
-                lastz = z;
+                lastz = z;*/
             }
+            mLastShakeTime = System.currentTimeMillis();
         }
 
     }
@@ -149,7 +167,7 @@ public class MoveService extends Service implements SensorEventListener {
     }
 
     public void cancelAlarms(Context context) {
-        AlarmManager moveAlarm = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+        AlarmManager moveAlarm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(Constants.START_MOVE_ALARM);
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context,
@@ -180,7 +198,7 @@ public class MoveService extends Service implements SensorEventListener {
         }
     }
 
-    public void notifyAlarmCanceled (){
+    public void notifyAlarmCanceled() {
         for (MoveListener listener : mListeners) {
             listener.onAlarmCanceled();
         }
