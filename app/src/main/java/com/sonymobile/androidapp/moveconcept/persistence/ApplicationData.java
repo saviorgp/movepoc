@@ -17,10 +17,21 @@ public class ApplicationData extends Application {
     /** Global application context */
     private static Context sApplicationContext = null;
 
+    public static boolean isDebuggable() {
+        return sDebuggable;
+    }
+
+    public static void setDebuggable(boolean sDebuggable) {
+        ApplicationData.sDebuggable = sDebuggable;
+    }
+
+    public static boolean sDebuggable;
+
     @Override
     public void onCreate() {
         super.onCreate();
-        // loadPreferences();
+        //
+        setDebuggable(true);
         setSharedPreferences(new SharedPreferencesHelper(getApplicationContext()));
         setApplicationContext(getApplicationContext());
     }

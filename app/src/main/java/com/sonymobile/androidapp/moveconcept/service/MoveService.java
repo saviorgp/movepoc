@@ -26,6 +26,7 @@ import com.sonymobile.androidapp.moveconcept.persistence.ApplicationData;
 import com.sonymobile.androidapp.moveconcept.persistence.SharedPreferencesHelper;
 import com.sonymobile.androidapp.moveconcept.receiver.MoveReceiver;
 import com.sonymobile.androidapp.moveconcept.utils.Constants;
+import com.sonymobile.androidapp.moveconcept.utils.Logger;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -116,12 +117,12 @@ public class MoveService extends Service implements SensorEventListener {
                     if ((y > 15 || y < -15) && (z > -2)) {
                         shakeTimeDetected = System.currentTimeMillis();
                         handshakeCounter += 1;
-                        Log.d("SmartMotion", "HandshakeGlobalService.onSensorEvent()... handshakeCounter = " + handshakeCounter);
+                        Logger.LOGI("HandshakeGlobalService.onSensorEvent()... handshakeCounter = " + handshakeCounter);
 
                     } else {
                         stepTimeDetected = System.currentTimeMillis();
                         stepCounter += 1;
-                        Log.d("SmartMotion", "HandshakeGlobalService.onSensorEvent()... stepCounter = " + stepCounter);
+                        Logger.LOGI("HandshakeGlobalService.onSensorEvent()... stepCounter = " + stepCounter);
                     }
                 }
 
