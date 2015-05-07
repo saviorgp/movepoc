@@ -19,6 +19,8 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Binder;
+import android.os.CountDownTimer;
+import android.os.Environment;
 import android.os.IBinder;
 import android.util.Log;
 
@@ -28,8 +30,10 @@ import com.sonymobile.androidapp.moveconcept.receiver.MoveReceiver;
 import com.sonymobile.androidapp.moveconcept.utils.Constants;
 import com.sonymobile.androidapp.moveconcept.utils.Logger;
 
+import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 public class MoveService extends Service implements SensorEventListener {
 
@@ -48,7 +52,7 @@ public class MoveService extends Service implements SensorEventListener {
     private static final int TIMEOUT_INTERVAL = 100;
     private static final int TIMEOUT_STEP_FACTOR = 2;
 
-    private static final int GFORCE_THRESHOLD = 2;
+    private static final double GFORCE_THRESHOLD = 1.3;
 
     private long mLastShake = 0;
 
@@ -62,6 +66,8 @@ public class MoveService extends Service implements SensorEventListener {
     private int stepCounter = 0;
     private long shakeTimeDetected = 0;
     private long stepTimeDetected = 0;
+    private int mSecondDiff = 0;
+
 
     /**
      * Binder
@@ -113,7 +119,7 @@ public class MoveService extends Service implements SensorEventListener {
             float gravityForce = (x * x + y * y + z * z) / (SensorManager.GRAVITY_EARTH * SensorManager.GRAVITY_EARTH);
 
             if (gravityForce > GFORCE_THRESHOLD && (System.currentTimeMillis() - mLastShakeTime) > (TIMEOUT_INTERVAL /2 )) {
-                if (System.currentTimeMillis() - shakeTimeDetected > TIMEOUT_INTERVAL && System.currentTimeMillis() - stepTimeDetected > TIMEOUT_INTERVAL * TIMEOUT_STEP_FACTOR) {
+                if (System.currentTimeMillis() - shakeTimeDetected > TIMEOUT_INTERVAL && System.currentTimeMillis() - stepTimeDetected >= TIMEOUT_INTERVAL * 10) {
                     if ((y > 15 || y < -15) && (z > -2)) {
                         shakeTimeDetected = System.currentTimeMillis();
                         handshakeCounter += 1;
@@ -122,7 +128,10 @@ public class MoveService extends Service implements SensorEventListener {
                     } else {
                         stepTimeDetected = System.currentTimeMillis();
                         stepCounter += 1;
+
                         Logger.LOGI("HandshakeGlobalService.onSensorEvent()... stepCounter = " + stepCounter);
+                        Logger.LOGI("Seconds" + TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()));
+                        Logger.LOGW(Float.toString(gravityForce));
                     }
                 }
 

@@ -38,6 +38,8 @@ public class Constants {
      */
     public static final long IDLE_LIMIT = 10 * 1000;
 
+    public static final long TIME_ABOVE_THRESHOLD = 7 * 1000;
+
     /**
      * General Intents
      */

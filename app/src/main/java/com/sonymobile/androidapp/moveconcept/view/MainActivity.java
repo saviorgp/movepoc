@@ -8,23 +8,33 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.media.MediaScannerConnection;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Environment;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sonymobile.androidapp.moveconcept.R;
 import com.sonymobile.androidapp.moveconcept.liveware.control.view.MoveMotionListener;
 import com.sonymobile.androidapp.moveconcept.liveware.service.MoveExtensionService;
+import com.sonymobile.androidapp.moveconcept.move.MoveMeter;
 import com.sonymobile.androidapp.moveconcept.persistence.ApplicationData;
 import com.sonymobile.androidapp.moveconcept.service.MoveListener;
 import com.sonymobile.androidapp.moveconcept.service.MoveService;
 import com.sonymobile.androidapp.moveconcept.service.MoveService.LocalBinder;
 import com.sonymobile.androidapp.moveconcept.utils.Constants;
+import com.sonymobile.androidapp.moveconcept.utils.Logger;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
@@ -42,10 +52,13 @@ public class MainActivity extends Activity {
     private TextView mTimer;
     private Button mSetAlarm;
     private Button mCancelAlarm;
+    private Button mRecordData;
     boolean mBound = false;
     private float wave[][];
+    private MoveMeter mMove;
 
     public static MoveMotionListener mListener;
+    private static String mPath = "/storage/emulated/legacy/MoveConcept/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +69,20 @@ public class MainActivity extends Activity {
         mTimer = (TextView) findViewById(R.id.timer);
         mSetAlarm = (Button) findViewById(R.id.btn_set_alarm);
         mCancelAlarm = (Button) findViewById(R.id.btn_cancel_alarm);
+        mRecordData = (Button) findViewById(R.id.btn_record_data);
+
+        final CountDownTimer countDown = new CountDownTimer(15 * 10 * 1000, 1000) {
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+            }
+
+            @Override
+            public void onFinish() {
+                Logger.LOGW("Finish");
+                mTimer.setText("Recording Finished");
+            }
+        };
 
         mSetAlarm.setOnClickListener(new OnClickListener() {
 
@@ -64,6 +91,8 @@ public class MainActivity extends Activity {
                 if (mBound) {
                     mService.setAlarms(getApplicationContext());
                 }
+
+                new SingleMediaScanner(ApplicationData.getAppContext(), mPath);
             }
         });
 
@@ -74,6 +103,18 @@ public class MainActivity extends Activity {
                 if (mBound && mService.isAlarmUp()) {
                     mService.cancelAlarms(getApplicationContext());
                 }
+            }
+        });
+
+        mRecordData.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                //countDown.start();
+                //Logger.LOGW("Start");
+                mMove = new MoveMeter(7);
+                Logger.LOGI("Start");
+                mTimer.setText("Recording");
             }
         });
 
@@ -178,5 +219,25 @@ public class MainActivity extends Activity {
             mService.addMoveListener(moveListener);
         }
     };
+
+
+    private class SingleMediaScanner implements MediaScannerConnection.MediaScannerConnectionClient {
+        private MediaScannerConnection mMs;
+
+        SingleMediaScanner(Context context, String f) {
+            mMs = new MediaScannerConnection(context, this);
+            mMs.connect();
+        }
+
+        @Override
+        public void onMediaScannerConnected() {
+            mMs.scanFile(mPath, null);
+        }
+
+        @Override
+        public void onScanCompleted(String path, Uri uri) {
+            mMs.disconnect();
+        }
+    }
 
 }

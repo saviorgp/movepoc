@@ -5,11 +5,51 @@
 
 package com.sonymobile.androidapp.moveconcept.utils;
 
+import android.content.Context;
+import android.content.Intent;
+import android.media.MediaScannerConnection;
+import android.net.Uri;
+import android.os.Environment;
 import android.util.Log;
 
 import com.sonymobile.androidapp.moveconcept.persistence.ApplicationData;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Logger {
+    private static File sFile;
+    private static OutputStreamWriter myOutWriter;
+    private static FileOutputStream fOut;
+    static SimpleDateFormat simpleDate = new SimpleDateFormat("HH-mm-ss");
+    static Date resultDate = new Date(System.currentTimeMillis());
+    private static  String stamp = simpleDate.format(resultDate);
+    private static String mPath = Environment.getExternalStorageDirectory().toString() + "/MoveConcept/" + stamp + ".txt";
+
+    static {
+        sFile = new File(mPath);
+
+        if (!sFile.exists()) {
+            try {
+                sFile.createNewFile();
+            } catch (IOException e) {
+                Logger.LOGW("error: " + e.toString());
+                //
+            }
+        }
+
+        try {
+            fOut = new FileOutputStream(sFile);
+            myOutWriter = new OutputStreamWriter(fOut);
+        } catch (IOException e) {
+            Logger.LOGW("Deu ruim: " + e);
+        }
+    }
 
     // Log tag
     private static final String TAG = "SmartMotion";
@@ -93,6 +133,7 @@ public class Logger {
     }
 
     /**
+     *
      * Information logs
      *
      * @param subtag
@@ -110,7 +151,16 @@ public class Logger {
      * @param text
      */
     public static void LOGW(String text) {
+        SimpleDateFormat simpleDate = new SimpleDateFormat("HH:mm:ss");
+        Date resultDate = new Date(System.currentTimeMillis());
+        String stamp = simpleDate.format(resultDate);
         if (DEBUG == true) {
+            try {
+                myOutWriter.append(stamp + " ; " + text + "\r\n");
+                myOutWriter.flush();
+            } catch (IOException e) {
+                //
+            }
             Log.w(TAG, text);
         }
     }
