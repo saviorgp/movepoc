@@ -79,7 +79,7 @@ public class MainActivity extends Activity {
 
             @Override
             public void onFinish() {
-                Logger.LOGW("Finish");
+                Logger.LOGI("Finish");
                 mTimer.setText("Recording Finished");
             }
         };
@@ -112,9 +112,9 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 //countDown.start();
                 //Logger.LOGW("Start");
-                mMove = new MoveMeter(7);
                 Logger.LOGI("Start");
                 mTimer.setText("Recording");
+                mService.registerListener();
             }
         });
 

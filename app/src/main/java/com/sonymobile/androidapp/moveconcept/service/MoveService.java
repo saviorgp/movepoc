@@ -19,55 +19,47 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Binder;
-import android.os.CountDownTimer;
-import android.os.Environment;
+import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
 
+import com.sonymobile.androidapp.moveconcept.model.MovePoints;
 import com.sonymobile.androidapp.moveconcept.persistence.ApplicationData;
 import com.sonymobile.androidapp.moveconcept.persistence.SharedPreferencesHelper;
 import com.sonymobile.androidapp.moveconcept.receiver.MoveReceiver;
 import com.sonymobile.androidapp.moveconcept.utils.Constants;
 import com.sonymobile.androidapp.moveconcept.utils.Logger;
 
-import java.io.File;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 public class MoveService extends Service implements SensorEventListener {
 
     private SensorManager mSensorManager;
-
     private Sensor mSensorAccelerometer;
-
+    private final SensorEventListener mSensorListener = this;
     private SharedPreferencesHelper prefs = ApplicationData.getSharedPreferences();
-
     private long mLastShakeTime = 0;
-
-    private float lastx, lasty, lastz;
-
-    private static final int SHAKE_THRESHOLD = 400;
-
     private static final int TIMEOUT_INTERVAL = 100;
     private static final int TIMEOUT_STEP_FACTOR = 2;
-
-    private static final double GFORCE_THRESHOLD = 1.3;
-
-    private long mLastShake = 0;
-
+    private static final double GFORCE_THRESHOLD = 0.8;
     private boolean mAlarmUp = false;
-
     final public static String ONE_TIME = "onetime";
-
     private static Set<MoveListener> mListeners = new HashSet<MoveListener>();
-
-    private int handshakeCounter = 0;
     private int stepCounter = 0;
     private long shakeTimeDetected = 0;
     private long stepTimeDetected = 0;
     private int mSecondDiff = 0;
+    private int mCountTime = 0 ;
+    private float mMedia = 0;
+    private long count = 0;
 
+    final Handler mHandler = new Handler();
+    MovePoints mMovePoints;
+    private List<MovePoints> mListPoints = new ArrayList<>();
 
     /**
      * Binder
@@ -96,16 +88,58 @@ public class MoveService extends Service implements SensorEventListener {
     public void onCreate() {
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mSensorAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        mSensorManager.registerListener(this, mSensorAccelerometer,
-                SensorManager.SENSOR_DELAY_NORMAL);
-        super.onCreate();
+        registerListener();
+        mRunnable.run();
+        /*mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                float mCount = 0;
+                float mMedia = 0;
+                for (MovePoints values : mListPoints) {
+                    mCount += 1;
+                    mMedia += values.getGForce();
+                    Logger.LOGI("values: " + values.getGForce());
+                }
+                Logger.LOGI("--------------------------------------------------------------media: " + mMedia/mCount);
+                mHandler.post(this);
+                //Logger.LOGI("mMedia: " + mMedia/count);
+                //mSensorManager.unregisterListener(mSensorListener);
+                mListPoints.clear();
+            }
+        }, 7000);*/
+    }
+
+    Runnable mRunnable = new Runnable() {
+        @Override
+        public void run() {
+            scheduleNextWindow();
+        }
+    };
+
+    private void scheduleNextWindow() {
+            float mCount = 0;
+            float mMedia = 0;
+            for (MovePoints values : mListPoints) {
+                mCount += 1;
+                mMedia += values.getGForce();
+                Logger.LOGI("values: " + values.getGForce());
+            }
+            Logger.LOGI("--------------------------------------------------------------media: " + mMedia/mCount);
+            //Logger.LOGI("mMedia: " + mMedia/count);
+            //mSensorManager.unregisterListener(mSensorListener);
+            mListPoints.clear();
+            mHandler.postDelayed(mRunnable,7000);
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         // setAlarms(this);
-        Log.i("SmartMotion", "INSTAnCE");
+        Log.i("SmartMotion", "INSTANCE");
         return START_STICKY;
+    }
+    public void registerListener(){
+        mSensorManager.registerListener(mSensorListener, mSensorAccelerometer,
+                SensorManager.SENSOR_DELAY_NORMAL);
     }
 
     @Override
@@ -119,37 +153,18 @@ public class MoveService extends Service implements SensorEventListener {
             float gravityForce = (x * x + y * y + z * z) / (SensorManager.GRAVITY_EARTH * SensorManager.GRAVITY_EARTH);
 
             if (gravityForce > GFORCE_THRESHOLD && (System.currentTimeMillis() - mLastShakeTime) > (TIMEOUT_INTERVAL /2 )) {
-                if (System.currentTimeMillis() - shakeTimeDetected > TIMEOUT_INTERVAL && System.currentTimeMillis() - stepTimeDetected >= TIMEOUT_INTERVAL * 10) {
-                    if ((y > 15 || y < -15) && (z > -2)) {
-                        shakeTimeDetected = System.currentTimeMillis();
-                        handshakeCounter += 1;
-                        Logger.LOGI("HandshakeGlobalService.onSensorEvent()... handshakeCounter = " + handshakeCounter);
-
-                    } else {
-                        stepTimeDetected = System.currentTimeMillis();
-                        stepCounter += 1;
-
-                        Logger.LOGI("HandshakeGlobalService.onSensorEvent()... stepCounter = " + stepCounter);
-                        Logger.LOGI("Seconds" + TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()));
-                        Logger.LOGW(Float.toString(gravityForce));
-                    }
+                    if (System.currentTimeMillis() - shakeTimeDetected > TIMEOUT_INTERVAL && System.currentTimeMillis() - stepTimeDetected > TIMEOUT_INTERVAL * TIMEOUT_STEP_FACTOR) {
+                    mMovePoints = new MovePoints(gravityForce,System.currentTimeMillis());
+                    mListPoints.add(mMovePoints);
+                    stepTimeDetected = System.currentTimeMillis();
+                    mMedia = (mMedia + gravityForce);
+                    count += 1;
+                    stepCounter += 1;
+                    Logger.LOGI("HandshakeGlobalService.onSensorEvent()... stepCounter = " + stepCounter);
+                    Logger.LOGI("Seconds" + TimeUnit.MILLISECONDS.toSeconds(stepTimeDetected));
+                    Logger.LOGI(Float.toString(gravityForce));
                 }
 
-                /*float speed = Math.abs(x + y + z - lastx - lasty - lastz) / diffTime * 10000;
-
-                if (speed > SHAKE_THRESHOLD) {
-                    if (mLastShake == 0) {
-                        mLastShake = System.currentTimeMillis();
-                    }
-                    prefs.setStartUnmoving(mLastShake);
-                    Log.i("SmartMotion", "Set: "
-                            + ApplicationData.getSharedPreferences().getStartUnmoving());
-                    mLastShake = System.currentTimeMillis();
-                    setAlarms(ApplicationData.getAppContext());
-                }
-                lastx = x;
-                lasty = y;
-                lastz = z;*/
             }
             mLastShakeTime = System.currentTimeMillis();
         }
