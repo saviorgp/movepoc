@@ -19,9 +19,9 @@ public class MovePoints {
     private float mGForce;
 
     /** Time for G-Force Measured */
-    private long mGForceTime;
+    private double mGForceTime;
 
-    public MovePoints(float mGForce, long mGForceTime) {
+    public MovePoints(float mGForce, double mGForceTime) {
         this.mGForce = mGForce;
         this.mGForceTime = mGForceTime;
     }
@@ -35,11 +35,11 @@ public class MovePoints {
         this.mGForce = mGForce;
     }
 
-    public long getGForceTime() {
+    public double getGForceTime() {
         return mGForceTime;
     }
 
-    public void setGForceTime(long mGForceTime) {
+    public void setGForceTime(double mGForceTime) {
         this.mGForceTime = mGForceTime;
     }
 }
