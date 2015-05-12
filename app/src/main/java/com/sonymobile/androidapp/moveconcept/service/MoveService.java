@@ -61,7 +61,9 @@ public class MoveService extends Service implements SensorEventListener {
 
     final Handler mHandler = new Handler();
     MovePoints mMovePoints;
+    MovePoints mMovePointsFiltered;
     private List<MovePoints> mListPoints = new ArrayList<>();
+    protected List<MovePoints> mListPointsFiltered = new ArrayList<>();
 
     /**
      * Binder
@@ -92,7 +94,6 @@ public class MoveService extends Service implements SensorEventListener {
         mSensorAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         registerListener();
         mRunnable.run();
-
     }
 
     /**
@@ -111,6 +112,8 @@ public class MoveService extends Service implements SensorEventListener {
     private synchronized void scheduleNextWindow() {
         float mSum = 0;
         float mMedia = 0;
+        float mNewSum = 0;
+        float mNewMedia = 0;
 
         if (!mListPoints.isEmpty()){
             compareAndSort();
@@ -121,13 +124,21 @@ public class MoveService extends Service implements SensorEventListener {
             Logger.LOGI("Soma " + mSum);
 
             mMedia = mSum / mListPoints.size();
-            Logger.LOGI(">>>>>>>>Desvio Padrao: " + calculateStandardDeviation(mMedia));
-            if (mMedia > 1.15f)
-                Logger.LOGW("------------------------Moving------------------------------ ");
-            Logger.LOGW("------------------------teste: " + teste + " ----------------------------------media: " + mMedia);
+            Logger.LOGW(">>>>>>>>Desvio Padrao: " + calculateStandardDeviation(mMedia));
 
+            stdDevFilter(calculateStandardDeviation(mMedia),mMedia);
+
+            for (MovePoints valuesNew : mListPointsFiltered) {
+                mNewSum += valuesNew.getGForce();
+            }
+            mNewMedia = mNewSum / mListPointsFiltered.size();
+            Logger.LOGW(" ----------------------------------mediaFILTRADA: " + mNewSum/mListPointsFiltered.size());
+            if (mNewMedia > 1.15f)
+                setAlarms(ApplicationData.getAppContext());
+            Logger.LOGW("------------------------teste: " + teste + " ----------------------------------media: " + mMedia);
             teste += 1;
         }
+        mListPointsFiltered.clear();
         mListPoints.clear();
         mHandler.postDelayed(mRunnable, 7000);
     }
@@ -145,16 +156,33 @@ public class MoveService extends Service implements SensorEventListener {
         Collections.sort(mListPoints, compareToSort);
     }
 
+    /**
+     * Standard Deviation Filter used to eliminate peeks
+     */
+    private void stdDevFilter (double stdDev,float mMedia ){
+        float mSum = 0;
+        for (MovePoints values : mListPoints){
+            if (mMedia + 2*stdDev > values.getGForce() ){
+                mMovePointsFiltered = new MovePoints(values.getGForce(), values.getGForceTime());
+                mListPointsFiltered.add(mMovePointsFiltered);
+            }
+        }
+
+        if (!mListPointsFiltered.isEmpty()){
+            for (MovePoints valuesFiltered : mListPointsFiltered){
+                //Logger.LOGI("values filtereeeddd" +valuesFiltered.getGForce());
+            }
+        }
+    }
 
     private double calculateStandardDeviation(float mMedia){
         float stdDev = 0;
 
         for (MovePoints values : mListPoints) {
             stdDev += ((values.getGForce() - mMedia) * (values.getGForce() - mMedia));
-            Logger.LOGI("values: " + values.getGForce());
         }
 
-        return Math.sqrt(stdDev/mMedia);
+        return Math.sqrt(stdDev/mListPoints.size());
     }
 
     @Override
@@ -186,7 +214,6 @@ public class MoveService extends Service implements SensorEventListener {
                     stepTimeDetected = System.currentTimeMillis();
                     mMedia = (mMedia + gravityForce);
                     stepCounter += 1;
-                    Logger.LOGI("HandshakeGlobalService.onSensorEvent()... stepCounter = " + stepCounter);
                     Logger.LOGI("Seconds" + TimeUnit.MILLISECONDS.toSeconds(stepTimeDetected));
                     Logger.LOGI(Float.toString(gravityForce));
                 }
@@ -196,7 +223,6 @@ public class MoveService extends Service implements SensorEventListener {
         }
 
     }
-
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
