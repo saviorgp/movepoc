@@ -23,6 +23,13 @@
         <dex dex="C:\Users\vntgago\SonyProjectsStudio\MoveConcept\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-4183fba057e2c8585d90bbc2033e9224d2d37535.jar" />
     </item>
     <item
+        jar="C:\Users\vntgago\SonyProjectsStudio\MoveConcept\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.3\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="C:\Users\vntgago\SonyProjectsStudio\MoveConcept\app\build\intermediates\pre-dexed\debug\classes-b03d1a2e8f2a9c2652850c202ae76563aa676559.jar" />
+    </item>
+    <item
         jar="C:\Users\vntgago\SonyProjectsStudio\MoveConcept\app\libs\SmartextEnsionUtils.jar"
         jumboMode="false"
         revision="22.0.1"

@@ -20,7 +20,7 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/MV_APP_NAME"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/MovaTheme" >
         
         <service 
             android:name=".service.CompareIdleTimeService"

@@ -23,4 +23,5 @@ dependencies {
     compile files ('libs/SmartMotionAPI.jar')
     compile files ('libs/SmartExtensionAPI.jar')
     compile files ('libs/SmartExtensionUtils.jar')
+    compile "com.android.support:appcompat-v7:21.0.+"
 }
