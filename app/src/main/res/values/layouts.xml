@@ -6,5 +6,5 @@
 -->
 <resources>
     <!-- Notifications -->
-    <item name="layout_gps_lost_notification" type="id">@layout/time_to_move_notification</item>
+    <item name="layout_time_to_move_notification" type="id">@layout/time_to_move_notification</item>
 </resources>

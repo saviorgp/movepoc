@@ -20,8 +20,23 @@
     <color name="accent_material_light">@color/material_deep_teal_500</color>
     <color name="background_floating_material_dark">#ff424242</color>
     <color name="background_floating_material_light">#ffeeeeee</color>
+    <!-- From: file:/C:/Users/vntgago/SonyProjectsStudio/MoveConcept/app/src/main/res/values/colors.xml -->
+    <eat-comment/>
+    <color name="background_gray">#FAFAFA</color>
+    <!-- From: file:/C:/Users/vntgago/SonyProjectsStudio/MoveConcept/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <eat-comment/>
     <color name="background_material_dark">#ff303030</color>
     <color name="background_material_light">#ffeeeeee</color>
+    <!-- From: file:/C:/Users/vntgago/SonyProjectsStudio/MoveConcept/app/src/main/res/values/colors.xml -->
+    <eat-comment/>
+    <color name="black">#000000</color>
+    <color name="black_alpha_20">#33000000</color>
+    <color name="black_alpha_26">#D2D2D2</color>
+    <color name="black_alpha_54">#9A9A9A</color>
+    <color name="black_alpha_58">#96000000</color>
+    <color name="blue_bgcolor">#4385F5</color>
+    <!-- From: file:/C:/Users/vntgago/SonyProjectsStudio/MoveConcept/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <eat-comment/>
     <color name="bright_foreground_disabled_material_dark">#80ffffff</color>
     <color name="bright_foreground_disabled_material_light">#80000000</color>
     <color name="bright_foreground_inverse_material_dark">@color/bright_foreground_material_light</color>
@@ -30,14 +45,35 @@
     <color name="bright_foreground_material_light">@android:color/black</color>
     <color name="button_material_dark">#ff5a595b</color>
     <color name="button_material_light">#ffd6d7d7</color>
+    <!-- From: file:/C:/Users/vntgago/SonyProjectsStudio/MoveConcept/app/src/main/res/values/colors.xml -->
+    <eat-comment/>
+    <color name="darker_gray">#212121</color>
+    <color name="default_text_color">#666666</color>
+    <color name="default_text_color_disabled">#A4A4A4</color>
+    <!-- From: file:/C:/Users/vntgago/SonyProjectsStudio/MoveConcept/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <eat-comment/>
     <color name="dim_foreground_disabled_material_dark">#80bebebe</color>
     <color name="dim_foreground_disabled_material_light">#80323232</color>
     <color name="dim_foreground_material_dark">#ffbebebe</color>
     <color name="dim_foreground_material_light">#ff323232</color>
+    <!-- From: file:/C:/Users/vntgago/SonyProjectsStudio/MoveConcept/app/src/main/res/values/colors.xml -->
+    <eat-comment/>
+    <color name="disabled_accent_color">#BDBDBD</color>
+    <color name="gray">#757575</color>
+    <color name="green_bgcolor">#0AC188</color>
+    <color name="green_link">#044520</color>
+    <!-- From: file:/C:/Users/vntgago/SonyProjectsStudio/MoveConcept/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <eat-comment/>
     <color name="highlighted_text_material_dark">#6680cbc4</color>
     <color name="highlighted_text_material_light">#66009688</color>
     <color name="hint_foreground_material_dark">@color/bright_foreground_disabled_material_dark</color>
     <color name="hint_foreground_material_light">@color/bright_foreground_disabled_material_light</color>
+    <!-- From: file:/C:/Users/vntgago/SonyProjectsStudio/MoveConcept/app/src/main/res/values/colors.xml -->
+    <eat-comment/>
+    <color name="light_blue_bgcolor">#0CB2BF</color>
+    <color name="light_gray">#BDBDBD</color>
+    <!-- From: file:/C:/Users/vntgago/SonyProjectsStudio/MoveConcept/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <eat-comment/>
     <color name="link_text_material_dark">@color/material_deep_teal_200</color>
     <color name="link_text_material_light">@color/material_deep_teal_500</color>
     <color name="material_blue_grey_800">#ff37474f</color>
@@ -45,6 +81,12 @@
     <color name="material_blue_grey_950">#ff21272b</color>
     <color name="material_deep_teal_200">#ff80cbc4</color>
     <color name="material_deep_teal_500">#ff009688</color>
+    <!-- From: file:/C:/Users/vntgago/SonyProjectsStudio/MoveConcept/app/src/main/res/values/colors.xml -->
+    <eat-comment/>
+    <color name="press_item">#EEEEEE</color>
+    <color name="primary_accent_color">#29B6F6</color>
+    <!-- From: file:/C:/Users/vntgago/SonyProjectsStudio/MoveConcept/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <eat-comment/>
     <color name="primary_dark_material_dark">#ff000000</color>
     <color name="primary_dark_material_light">#ff757575</color>
     <color name="primary_material_dark">#ff212121</color>
@@ -53,6 +95,11 @@
     <color name="primary_text_default_material_light">#de000000</color>
     <color name="primary_text_disabled_material_dark">#4Dffffff</color>
     <color name="primary_text_disabled_material_light">#39000000</color>
+    <!-- From: file:/C:/Users/vntgago/SonyProjectsStudio/MoveConcept/app/src/main/res/values/colors.xml -->
+    <eat-comment/>
+    <color name="pure_red">#FF0000</color>
+    <!-- From: file:/C:/Users/vntgago/SonyProjectsStudio/MoveConcept/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <eat-comment/>
     <color name="ripple_material_dark">#40ffffff</color>
     <color name="ripple_material_light">#40000000</color>
     <color name="secondary_text_default_material_dark">#b3ffffff</color>
@@ -61,6 +108,11 @@
     <color name="secondary_text_disabled_material_light">#24000000</color>
     <color name="switch_thumb_normal_material_dark">#ffbdbdbd</color>
     <color name="switch_thumb_normal_material_light">#fff1f1f1</color>
+    <!-- From: file:/C:/Users/vntgago/SonyProjectsStudio/MoveConcept/app/src/main/res/values/colors.xml -->
+    <eat-comment/>
+    <color name="third_accent_color">#29B6F6</color>
+    <color name="transparent">#00000000</color>
+    <color name="white">#FFFFFF</color>
     <declare-styleable name="ActionBar"><attr name="navigationMode"><enum name="normal" value="0"/><enum name="listMode" value="1"/><enum name="tabMode" value="2"/></attr><attr name="displayOptions"><flag name="none" value="0"/><flag name="useLogo" value="0x1"/><flag name="showHome" value="0x2"/><flag name="homeAsUp" value="0x4"/><flag name="showTitle" value="0x8"/><flag name="showCustom" value="0x10"/><flag name="disableHome" value="0x20"/></attr><attr name="title"/><attr format="string" name="subtitle"/><attr format="reference" name="titleTextStyle"/><attr format="reference" name="subtitleTextStyle"/><attr format="reference" name="icon"/><attr format="reference" name="logo"/><attr format="reference" name="divider"/><attr format="reference" name="background"/><attr format="reference|color" name="backgroundStacked"/><attr format="reference|color" name="backgroundSplit"/><attr format="reference" name="customNavigationLayout"/><attr name="height"/><attr format="reference" name="homeLayout"/><attr format="reference" name="progressBarStyle"/><attr format="reference" name="indeterminateProgressStyle"/><attr format="dimension" name="progressBarPadding"/><attr name="homeAsUpIndicator"/><attr format="dimension" name="itemPadding"/><attr format="boolean" name="hideOnContentScroll"/><attr format="dimension" name="contentInsetStart"/><attr format="dimension" name="contentInsetEnd"/><attr format="dimension" name="contentInsetLeft"/><attr format="dimension" name="contentInsetRight"/><attr format="dimension" name="elevation"/><attr format="reference" name="popupTheme"/></declare-styleable>
     <declare-styleable name="ActionBarLayout"><attr name="android:layout_gravity"/></declare-styleable>
     <declare-styleable name="ActionMenuItemView"><attr name="android:minWidth"/></declare-styleable>
@@ -84,6 +136,8 @@
     <declare-styleable name="Toolbar"><attr format="reference" name="titleTextAppearance"/><attr format="reference" name="subtitleTextAppearance"/><attr name="title"/><attr name="subtitle"/><attr name="android:gravity"/><attr format="dimension" name="titleMargins"/><attr format="dimension" name="titleMarginStart"/><attr format="dimension" name="titleMarginEnd"/><attr format="dimension" name="titleMarginTop"/><attr format="dimension" name="titleMarginBottom"/><attr name="contentInsetStart"/><attr name="contentInsetEnd"/><attr name="contentInsetLeft"/><attr name="contentInsetRight"/><attr format="dimension" name="maxButtonHeight"/><attr format="reference" name="theme"/><attr format="reference" name="collapseIcon"/><attr format="string" name="collapseContentDescription"/><attr name="popupTheme"/><attr format="reference" name="navigationIcon"/><attr format="string" name="navigationContentDescription"/><attr name="android:minHeight"/></declare-styleable>
     <declare-styleable name="View"><attr format="dimension" name="paddingStart"/><attr format="dimension" name="paddingEnd"/><attr name="android:focusable"/></declare-styleable>
     <declare-styleable name="ViewStubCompat"><attr name="android:layout"/><attr name="android:inflatedId"/><attr name="android:id"/></declare-styleable>
+    <!-- From: file:/C:/Users/vntgago/SonyProjectsStudio/MoveConcept/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <eat-comment/>
     <dimen name="abc_action_bar_default_height_material">56dp</dimen>
     <dimen name="abc_action_bar_default_padding_material">4dp</dimen>
     <dimen name="abc_action_bar_icon_vertical_padding_material">16dp</dimen>
@@ -125,6 +179,10 @@
     <eat-comment/>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="button_text_size">14dp</dimen>
+    <dimen name="center_image_height">250dp</dimen>
+    <dimen name="center_image_width">250dp</dimen>
+    <dimen name="content_default_padding">20dp</dimen>
     <!-- From: file:/C:/Users/vntgago/SonyProjectsStudio/MoveConcept/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <item name="dialog_fixed_height_major" type="dimen">80%</item>
@@ -133,6 +191,17 @@
     <item name="dialog_fixed_width_minor" type="dimen">320dp</item>
     <item format="float" name="disabled_alpha_material_dark" type="dimen">0.30</item>
     <item format="float" name="disabled_alpha_material_light" type="dimen">0.26</item>
+    <!-- From: file:/C:/Users/vntgago/SonyProjectsStudio/MoveConcept/app/src/main/res/values/dimens.xml -->
+    <eat-comment/>
+    <dimen name="margin_bottom_image">15dp</dimen>
+    <dimen name="margin_default_15">15dp</dimen>
+    <dimen name="margin_title_bottom">10dp</dimen>
+    <dimen name="margin_top_image">10dp</dimen>
+    <dimen name="padding_status_bar">15dp</dimen>
+    <dimen name="text_description_size">14dp</dimen>
+    <dimen name="title_size">24dp</dimen>
+    <!-- From: file:/C:/Users/vntgago/SonyProjectsStudio/MoveConcept/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <eat-comment/>
     <item name="action_bar_activity_content" type="id"/>
     <item name="action_bar_spinner" type="id"/>
     <item name="action_menu_divider" type="id"/>
@@ -140,7 +209,7 @@
     <item name="home" type="id"/>
     <!-- From: file:/C:/Users/vntgago/SonyProjectsStudio/MoveConcept/app/src/main/res/values/layouts.xml -->
     <eat-comment/>
-    <item name="layout_gps_lost_notification" type="id">@layout/time_to_move_notification</item>
+    <item name="layout_time_to_move_notification" type="id">@layout/time_to_move_notification</item>
     <!-- From: file:/C:/Users/vntgago/SonyProjectsStudio/MoveConcept/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <item name="progress_circular" type="id"/>
@@ -151,6 +220,17 @@
     <!-- From: file:/C:/Users/vntgago/SonyProjectsStudio/MoveConcept/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="MV_APP_NAME">MoveConcept</string>
+    <string name="MV_BTN_CANCEL">Cancelar</string>
+    <string name="MV_BTN_CONTINUE">Continuar ></string>
+    <string name="MV_BTN_DISMISS">Dispensar</string>
+    <string name="MV_BTN_OK">Ok</string>
+    <string name="MV_INITIAL_TEXT">Movimentar o corpo traz muitos benefícios à saúde. O MOVA te ajuda a se lembrar de se movimentar com mais frequência durante o dia.</string>
+    <string name="MV_INITIAL_TITLE">Movimente-se</string>
+    <string name="MV_MOVE_LINK"><u>Saiba mais sobre a importância de se movimentar.</u></string>
+    <string name="MV_MOVE_TEXT">Ei, percebemos que você está parado a aproximadamente {0} {1}. Que tal fazermos {2} {3} de caminhada agora?</string>
+    <string name="MV_NOTIFICATION_SUBTITLE">Que tal se exercitar um pouco?</string>
+    <string name="MV_READY_TEXT">Deixe com a gente! Vamos notificar quando for um bom momento para você se movimentar.</string>
+    <string name="MV_READY_TITLE">Pronto!</string>
     <!-- From: file:/C:/Users/vntgago/SonyProjectsStudio/MoveConcept/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <string name="abc_action_bar_home_description">Navigate home</string>
@@ -172,7 +252,6 @@
     <!-- From: file:/C:/Users/vntgago/SonyProjectsStudio/MoveConcept/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
     <!-- From: file:/C:/Users/vntgago/SonyProjectsStudio/MoveConcept/app/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="AppBaseTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">

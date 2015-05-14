@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ @file ${NAME}
+  ~ @author Gabriel Gonçalves (gabriel.goncalves@venturus.org.br)
+  ~ @created ${DATE}
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/blue_bgcolor"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/padding_status_bar">
+
+    <ImageView
+        android:id="@+id/ready_img"
+        android:layout_width="@dimen/center_image_width"
+        android:layout_height="@dimen/center_image_height"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/margin_top_image"
+        android:layout_marginBottom="@dimen/margin_bottom_image"
+        android:src="@drawable/mova_center_image"/>
+
+    <TextView
+        android:id="@+id/move_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ready_img"
+        android:textSize="@dimen/title_size"
+        android:textColor="@color/white"
+        android:layout_marginBottom="@dimen/margin_title_bottom"
+        android:layout_marginLeft="@dimen/margin_default_15"
+        android:text="@string/MV_INITIAL_TITLE"/>
+
+    <TextView
+        android:id="@+id/move_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/move_title"
+        android:textSize="@dimen/text_description_size"
+        android:textColor="@color/white"
+        android:layout_marginLeft="@dimen/margin_default_15"
+        android:layout_marginRight="@dimen/margin_default_15"
+        android:text="@string/MV_MOVE_TEXT"/>
+
+    <RelativeLayout
+        android:id="@+id/initial_buttons_group"
+        android:layout_below="@id/move_description"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+
+        <Button
+            android:id="@+id/btn_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/MV_BTN_OK"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textAllCaps="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:background="@null"/>
+
+
+        <Button
+            android:id="@+id/btn_dismiss"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/MV_BTN_DISMISS"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textAllCaps="true"
+            android:layout_alignParentBottom="true"
+            android:layout_toLeftOf="@id/btn_ok"
+            android:background="@null"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>
+<!-- From: file:/C:/Users/vntgago/SonyProjectsStudio/MoveConcept/app/src/main/res/layout/move_activity_layout.xml -->

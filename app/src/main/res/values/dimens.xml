@@ -4,4 +4,19 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
+    <!-- General margins and paddings  -->
+    <dimen name="margin_default_15">15dp</dimen>
+    <dimen name="padding_status_bar">15dp</dimen>
+
+    <!-- Images, margins, titles  -->
+    <dimen name="center_image_width">250dp</dimen>
+    <dimen name="center_image_height">250dp</dimen>
+    <dimen name="margin_top_image">10dp</dimen>
+    <dimen name="margin_bottom_image">15dp</dimen>
+    <dimen name="content_default_padding">20dp</dimen>
+    <dimen name="title_size">24dp</dimen>
+    <dimen name="margin_title_bottom">10dp</dimen>
+    <dimen name="text_description_size">14dp</dimen>
+    <dimen name="button_text_size">14dp</dimen>
+
 </resources>

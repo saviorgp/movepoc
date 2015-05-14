@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ @file ${NAME}
+  ~ @author Gabriel Gonçalves (gabriel.goncalves@venturus.org.br)
+  ~ @created ${DATE}
+  -->
+
+<resources>
+
+    <!-- Standard colors -->
+    <color name="primary_accent_color">#29B6F6</color>
+    <color name="disabled_accent_color">#BDBDBD</color>
+    <color name="press_item">#EEEEEE</color>
+    <color name="third_accent_color">#29B6F6</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="background_gray">#FAFAFA</color>
+
+    <!-- General UI -->
+    <color name="default_text_color">#666666</color>
+    <color name="default_text_color_disabled">#A4A4A4</color>
+    <color name="black_alpha_20">#33000000</color>
+    <color name="black_alpha_58">#96000000</color>
+    <color name="black_alpha_26">#D2D2D2</color>
+    <color name="black_alpha_54">#9A9A9A</color>
+    <color name="gray">#757575</color>
+    <color name="light_gray">#BDBDBD</color>
+    <color name="darker_gray">#212121</color>
+    <color name="pure_red">#FF0000</color>
+    <color name="transparent">#00000000</color>
+    <color name="green_bgcolor">#0AC188</color>
+    <color name="light_blue_bgcolor">#0CB2BF</color>
+    <color name="blue_bgcolor">#4385F5</color>
+    <color name="green_link">#044520</color>
+
+</resources>

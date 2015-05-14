@@ -36,7 +36,9 @@ public class Constants {
     /**
      * Constants
      */
-    public static final long IDLE_LIMIT = 10 * 1000;
+    public static final long IDLE_LIMIT = 10 * 60 * 1000;
+
+    public static final long TIME_SUGGESTION = 5 * 60 * 1000;
 
     public static final long TIME_ABOVE_THRESHOLD = 7 * 1000;
 
@@ -46,5 +48,10 @@ public class Constants {
     public static final String PACKAGE_NAME = "com.sonymobile.androidapp.moveconcept";
 
     public static final String START_MOVE_ALARM = PACKAGE_NAME + ".action.START_MOVE_ALARM";
+
+    /**
+     * Other
+     */
+    public static final String VIVO_MORE_HEALTHY = "http://vc.vivo.com.br/apwms";
 
 }

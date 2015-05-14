@@ -8,13 +8,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.graphics.Color;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewParent;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -30,13 +39,17 @@ import com.sonymobile.androidapp.moveconcept.utils.Logger;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.Vector;
 
 /**
  * @author Gabriel Gon�alves (gabriel.goncalves@venturus.org.br)
  * @file MainActivity.java
  * @created 16/04/2015
  */
-public class MainActivity extends Activity {
+public class MainActivity extends FragmentActivity {
+
+    static final int NUM_PAGES = 2;
 
     MoveService mService;
     BroadcastReceiver mReceiver;
@@ -44,22 +57,37 @@ public class MainActivity extends Activity {
     private TextView mTimer;
     private Button mSetAlarm;
     private Button mCancelAlarm;
-    private Button mRecordData;
     boolean mBound = false;
+    private Button mBtnOk;
+    private Button mBtnCancel;
+    private Button mBtnContinue;
 
     public static MoveMotionListener mListener;
     private static String mPath = "/storage/emulated/legacy/MoveConcept/";
+
+    private PageAdapter mPagerAdapter;
+    ViewPager mPager;
+    boolean isOpaque = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.viewpager_layout);
 
         mTimer = (TextView) findViewById(R.id.timer);
         mSetAlarm = (Button) findViewById(R.id.btn_set_alarm);
         mCancelAlarm = (Button) findViewById(R.id.btn_cancel_alarm);
-        mRecordData = (Button) findViewById(R.id.btn_record_data);
+        mBtnOk = (Button) findViewById(R.id.btn_ok);
+        mBtnCancel = (Button) findViewById(R.id.btn_cancel);
+        mBtnContinue = (Button) findViewById(R.id.btn_continue);
+
+
+        /** Transparent StatusBar */
+        Window window = getWindow();
+        window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+        initializeViewPager();
 
         mSetAlarm.setOnClickListener(new OnClickListener() {
 
@@ -82,25 +110,96 @@ public class MainActivity extends Activity {
                     mService.cancelAlarms(getApplicationContext());
                 }*/
                 Logger.LOGW("Stop");
-
             }
         });
+    }
 
-        mRecordData.setOnClickListener(new OnClickListener() {
+    private void initializeViewPager() {
+        List<Fragment> fragments = new Vector<Fragment>();
+        fragments.add(Fragment.instantiate(this, InitialFragment.class.getName()));
+        fragments.add(Fragment.instantiate(this, ReadyFragment.class.getName()));
+        mPagerAdapter = new PageAdapter(this.getSupportFragmentManager(), fragments);
+
+        mPager = (ViewPager) findViewById(R.id.viewpager);
+        mPager.setAdapter(mPagerAdapter);
+        mPager.setPageTransformer(true, new CrossfadePageTransformer());
+
+        mPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                if (position == NUM_PAGES - 2 && positionOffset > 0) {
+                    if (isOpaque) {
+                        mPager.setBackgroundColor(Color.TRANSPARENT);
+                        isOpaque = false;
+                    }
+                } else {
+                    if (!isOpaque) {
+                        mPager.setBackgroundColor(getResources().getColor(R.color.blue_bgcolor));
+                        isOpaque = true;
+                    }
+                }
+            }
 
             @Override
-            public void onClick(View v) {
-                /*Logger.LOGI("Start");
-                mTimer.setText("Recording");*/
+            public void onPageSelected(int position) {
+                switch (position) {
+                    case 0:
+                        mBtnContinue.setVisibility(View.VISIBLE);
+                        mBtnOk.setVisibility(View.GONE);
+                        mBtnCancel.setVisibility(View.GONE);
+                        break;
+
+                    case 1:
+                        mBtnContinue.setVisibility(View.GONE);
+                        mBtnOk.setVisibility(View.VISIBLE);
+                        mBtnCancel.setVisibility(View.VISIBLE);
+                        break;
+
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                //Do nothing
             }
         });
 
+        mBtnContinue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPager.setCurrentItem(1);
+                v.setVisibility(View.GONE);
+                mBtnOk.setVisibility(View.VISIBLE);
+                mBtnCancel.setVisibility(View.VISIBLE);
+            }
+        });
+
+        mBtnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPager.setCurrentItem(0);
+                v.setVisibility(View.VISIBLE);
+                mBtnOk.setVisibility(View.GONE);
+                mBtnCancel.setVisibility(View.GONE);
+            }
+        });
+
+        mBtnOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ApplicationData.getAppContext(), MoveService.class);
+                bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+
+                Intent startMain = new Intent(Intent.ACTION_MAIN);
+                startMain.addCategory(Intent.CATEGORY_HOME);
+                startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(startMain);
+            }
+        });
     }
 
     @Override
     protected void onStart() {
-        Intent intent = new Intent(ApplicationData.getAppContext(), MoveService.class);
-        bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
         super.onStart();
     }
 
@@ -108,9 +207,9 @@ public class MainActivity extends Activity {
     protected void onStop() {
         super.onStop();
         if (mBound) {
-           // Logger.LOGD( "Unbinding...");
-           //  mBound = false;
-           //  startService(new Intent(ApplicationData.getAppContext(), MoveService.class));
+            // Logger.LOGD( "Unbinding...");
+            //  mBound = false;
+            //  startService(new Intent(ApplicationData.getAppContext(), MoveService.class));
         }
     }
 
@@ -196,24 +295,73 @@ public class MainActivity extends Activity {
         }
     };
 
-
-    private class SingleMediaScanner implements MediaScannerConnection.MediaScannerConnectionClient {
-        private MediaScannerConnection mMs;
-
-        SingleMediaScanner(Context context, String f) {
-            mMs = new MediaScannerConnection(context, this);
-            mMs.connect();
-        }
+    /**
+     * Animate Fragments
+     */
+    public class CrossfadePageTransformer implements ViewPager.PageTransformer {
 
         @Override
-        public void onMediaScannerConnected() {
-            mMs.scanFile(mPath, null);
-        }
+        public void transformPage(View page, float position) {
+            int pageWidth = page.getWidth();
 
-        @Override
-        public void onScanCompleted(String path, Uri uri) {
-            mMs.disconnect();
+            View backgroundView = page.findViewById(R.id.background_view);
+
+            /** Intial components*/
+            View initialImg = page.findViewById(R.id.initial_img);
+            View initialTitle = page.findViewById(R.id.initial_title);
+            View initialText = page.findViewById(R.id.initial_description);
+            View link = page.findViewById(R.id.initial_link);
+
+            /** Ready components*/
+            View readyImg = page.findViewById(R.id.ready_img);
+            View readyTitle = page.findViewById(R.id.ready_title);
+            View readyText = page.findViewById(R.id.ready_description);
+
+            if (position <= 1) {
+                page.setTranslationX(pageWidth * -position);
+            }
+
+            if (position <= -1.0f || position >= 1.0f) {
+            } else if (position == 0.0f) {
+            } else {
+                if (backgroundView != null) {
+                    backgroundView.setAlpha(1.0f - Math.abs(position));
+                }
+
+                //Text both translates in/out and fades in/out
+                if (initialText != null) {
+                    initialText.setTranslationX(pageWidth * position);
+                    initialText.setAlpha(1.0f - Math.abs(position));
+                }
+
+                if (link != null) {
+                    link.setTranslationX(pageWidth * position);
+                    link.setAlpha(1.0f - Math.abs(position));
+                }
+
+                if (initialImg != null) {
+                    initialImg.setTranslationX((float) (pageWidth / 1.2 * position));
+                }
+
+                if (initialTitle != null) {
+                    initialTitle.setTranslationX(pageWidth * position);
+                    initialTitle.setTranslationX((float) (pageWidth / 1.2 * position));
+                }
+
+                if (readyImg != null) {
+                    readyImg.setAlpha(1.0f - Math.abs(position));
+                    readyImg.setTranslationX((float) (pageWidth / 1.2 * position));
+                }
+                if (readyTitle != null) {
+                    readyTitle.setAlpha(1.0f - Math.abs(position));
+                    readyTitle.setTranslationX((float) (pageWidth / 1.2 * position));
+                }
+                if (readyText != null) {
+                    readyText.setAlpha(1.0f - Math.abs(position));
+                    readyText.setTranslationX((float) (pageWidth / 1.2 * position));
+                }
+
+            }
         }
     }
-
 }

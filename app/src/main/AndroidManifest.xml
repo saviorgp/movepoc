@@ -79,12 +79,23 @@
             android:name="com.sonymobile.androidapp.moveconcept.view.MainActivity"
             android:screenOrientation="portrait"
             android:label="@string/MV_APP_NAME" >
+            <!--<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
+
+        </activity>
+
+        <activity
+            android:name="com.sonymobile.androidapp.moveconcept.view.TimeToMoveActivity"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
+
     </application>
 
 </manifest>

@@ -21,7 +21,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/notification_icon"
-        android:paddingLeft="8dp"
         android:paddingTop="6dp"
         android:text="Title"
         android:textAppearance="@android:style/TextAppearance.StatusBar.EventContent.Title" >
@@ -33,10 +32,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/title"
         android:layout_toRightOf="@id/notification_icon"
-        android:paddingLeft="8dp"
         android:singleLine="true"
-        android:text="Subtitle"
-        android:textAppearance="@android:style/TextAppearance.StatusBar.EventContent.Title"  >
+        android:textAppearance="@android:style/TextAppearance.StatusBar.EventContent"  >
     </TextView>
 
 </RelativeLayout>

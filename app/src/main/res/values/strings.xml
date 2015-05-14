@@ -1,8 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    /** General */
     <string name="MV_APP_NAME">MoveConcept</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="MV_INITIAL_TITLE">Movimente-se</string>
+    <string name="MV_READY_TITLE">Pronto!</string>
+
+    /** Text Description */
+    <string name="MV_INITIAL_TEXT">Movimentar o corpo traz muitos benefícios à saúde. O MOVA te ajuda a se lembrar de se movimentar com mais frequência durante o dia.</string>
+    <string name="MV_READY_TEXT">Deixe com a gente! Vamos notificar quando for um bom momento para você se movimentar.</string>
+    <string name="MV_MOVE_TEXT">Ei, percebemos que você está parado a aproximadamente {0} {1}. Que tal fazermos {2} {3} de caminhada agora?</string>
+
+    /** Text Description */
+    <string name="MV_MOVE_LINK"><u>Saiba mais sobre a importância de se movimentar.</u></string>
+
+    /** Buttons */
+    <string name="MV_BTN_CONTINUE">Continuar ></string>
+    <string name="MV_BTN_CANCEL">Cancelar</string>
+    <string name="MV_BTN_OK">Ok</string>
+    <string name="MV_BTN_DISMISS">Dispensar</string>
+
+    /** Notification */
+    <string name="MV_NOTIFICATION_SUBTITLE">Que tal se exercitar um pouco?</string>
 
 </resources>

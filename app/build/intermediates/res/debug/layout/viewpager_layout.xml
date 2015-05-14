@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ @file ${NAME}
+  ~ @author Gabriel Gonçalves (gabriel.goncalves@venturus.org.br)
+  ~ @created ${DATE}
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"/>
+
+    <RelativeLayout
+        android:id="@+id/initial_buttons_group"
+        android:layout_below="@id/initial_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/btn_continue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/MV_BTN_CONTINUE"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textAllCaps="true"
+            android:background="@null"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"/>
+
+        <Button
+            android:id="@+id/btn_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/MV_BTN_OK"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textAllCaps="true"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:visibility="gone"
+            android:background="@null"/>
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/MV_BTN_CANCEL"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textAllCaps="true"
+            android:layout_alignParentBottom="true"
+            android:layout_toLeftOf="@id/btn_ok"
+            android:visibility="gone"
+            android:background="@null"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:textSize="40dp"
+        android:text="0"
+        android:visibility="gone"/>
+
+    <Button
+        android:id="@+id/btn_set_alarm"
+        android:layout_below="@+id/timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@null"
+        android:layout_alignParentRight="true"
+        android:textAllCaps="true"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btn_cancel_alarm"
+        android:layout_below="@+id/btn_set_alarm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="Cancel Alarm"
+        android:visibility="gone"/>
+
+    <Button
+        android:id="@+id/btn_record_data"
+        android:layout_below="@+id/btn_cancel_alarm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="Record Data"
+        android:visibility="gone"/>
+</RelativeLayout>
+<!-- From: file:/C:/Users/vntgago/SonyProjectsStudio/MoveConcept/app/src/main/res/layout/viewpager_layout.xml -->
