@@ -1,7 +1,14 @@
 <component name="CopyrightManager">
-  <settings default="Gabriel Venturus">
+  <settings default="Sony">
     <module2copyright>
-      <element module="All" copyright="Gabriel Venturus" />
+      <element module="All" copyright="Sony" />
     </module2copyright>
+    <LanguageOptions name="JAVA">
+      <option name="fileTypeOverride" value="3" />
+    </LanguageOptions>
+    <LanguageOptions name="XML">
+      <option name="fileTypeOverride" value="3" />
+      <option name="prefixLines" value="false" />
+    </LanguageOptions>
   </settings>
 </component>

@@ -1,7 +1,6 @@
 /*
- * @file ${NAME}
- * @author Gabriel Gonçalves (gabriel.goncalves@venturus.org.br)
- * @created ${DATE}
+ * Copyright (C) 2015 Sony Mobile Communications Inc.
+ * All rights, including trade secret rights, reserved.
  */
 
 package com.sonymobile.androidapp.moveconcept.model;

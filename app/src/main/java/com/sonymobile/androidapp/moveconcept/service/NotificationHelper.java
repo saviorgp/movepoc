@@ -1,4 +1,9 @@
 
+/*
+ * Copyright (C) 2015 Sony Mobile Communications Inc.
+ * All rights, including trade secret rights, reserved.
+ */
+
 package com.sonymobile.androidapp.moveconcept.service;
 
 import android.app.Notification;
@@ -18,6 +23,12 @@ import com.sonymobile.androidapp.moveconcept.view.MainActivity;
 import com.sonymobile.androidapp.moveconcept.view.ReadyFragment;
 import com.sonymobile.androidapp.moveconcept.view.TimeToMoveActivity;
 
+/**
+ * @author vntgago
+ * @file NotificationHelper
+ * @created 29/04/2015
+ */
+
 public class NotificationHelper {
 
     /**
@@ -27,6 +38,9 @@ public class NotificationHelper {
             0, 300, 300, 300
     };
 
+    /**
+     * Time to move notification
+     */
     public static void showStartMovingNotification() {
         Context context = ApplicationData.getAppContext();
         RemoteViews remoteViews = new RemoteViews(context.getPackageName(),

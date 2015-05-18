@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="SmartMotionAPI">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/app/libs/SmartMotionAPI.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

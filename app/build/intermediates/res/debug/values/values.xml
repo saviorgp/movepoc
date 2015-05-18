@@ -231,6 +231,8 @@
     <string name="MV_NOTIFICATION_SUBTITLE">Que tal se exercitar um pouco?</string>
     <string name="MV_READY_TEXT">Deixe com a gente! Vamos notificar quando for um bom momento para você se movimentar.</string>
     <string name="MV_READY_TITLE">Pronto!</string>
+    <string name="MV_TIME_HOURS">horas</string>
+    <string name="MV_TIME_MINUTES">minutos</string>
     <!-- From: file:/C:/Users/vntgago/SonyProjectsStudio/MoveConcept/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <string name="abc_action_bar_home_description">Navigate home</string>

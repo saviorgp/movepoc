@@ -1,4 +1,9 @@
 
+/*
+ * Copyright (C) 2015 Sony Mobile Communications Inc.
+ * All rights, including trade secret rights, reserved.
+ */
+
 package com.sonymobile.androidapp.moveconcept.utils;
 
 /**
@@ -36,7 +41,7 @@ public class Constants {
     /**
      * Constants
      */
-    public static final long IDLE_LIMIT = 10 * 60 * 1000;
+    public static final long IDLE_LIMIT = 1 * 60 * 1000;
 
     public static final long TIME_SUGGESTION = 5 * 60 * 1000;
 

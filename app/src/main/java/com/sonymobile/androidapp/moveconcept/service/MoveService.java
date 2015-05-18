@@ -1,10 +1,7 @@
 
 /*
- * *
- *  * @file ApplicationData.java
- *  * @author Gabriel Goncalves (gabriel.goncalves@venturus.org.br)
- *  * @created 14/04/2015
- *
+ * Copyright (C) 2015 Sony Mobile Communications Inc.
+ * All rights, including trade secret rights, reserved.
  */
 
 package com.sonymobile.androidapp.moveconcept.service;
@@ -25,10 +22,9 @@ import android.util.Log;
 
 import com.sonymobile.androidapp.moveconcept.model.MovePoints;
 import com.sonymobile.androidapp.moveconcept.persistence.ApplicationData;
-import com.sonymobile.androidapp.moveconcept.persistence.SharedPreferencesHelper;
-import com.sonymobile.androidapp.moveconcept.receiver.MoveReceiver;
 import com.sonymobile.androidapp.moveconcept.utils.Constants;
 import com.sonymobile.androidapp.moveconcept.utils.Logger;
+import com.sonymobile.androidapp.moveconcept.utils.SettingsUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -36,28 +32,32 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
+
+/**
+ * @author vntgago
+ * @file MoveService
+ * @created 29/04/2015
+ */
 
 public class MoveService extends Service implements SensorEventListener {
 
     private SensorManager mSensorManager;
     private Sensor mSensorAccelerometer;
     private final SensorEventListener mSensorListener = this;
-    private SharedPreferencesHelper prefs = ApplicationData.getSharedPreferences();
     private long mLastShakeTime = 0;
     private static final int TIMEOUT_INTERVAL = 100;
     private static final int TIMEOUT_STEP_FACTOR = 2;
 
-    /** Normal value is 1g (Use 0.8 threshold for future calibrate) */
+    /**
+     * Normal value is 1g (Use 0.8 threshold for future calibrate)
+     */
     private static final double GFORCE_THRESHOLD = 0.8;
     private boolean mAlarmUp = false;
     final public static String ONE_TIME = "onetime";
     private static Set<MoveListener> mListeners = new HashSet<>();
-    private int stepCounter = 0;
     private long shakeTimeDetected = 0;
     private long stepTimeDetected = 0;
     private float mMedia = 0;
-    private long teste = 0;
 
     final Handler mHandler = new Handler();
     MovePoints mMovePoints;
@@ -85,7 +85,7 @@ public class MoveService extends Service implements SensorEventListener {
     }
 
     public MoveService() {
-        Log.i("SmartMotion", "NEW SERVICE");
+        Logger.LOGI("NEW SERVICE");
     }
 
     @Override
@@ -115,7 +115,7 @@ public class MoveService extends Service implements SensorEventListener {
         float mNewSum = 0;
         float mNewMedia = 0;
 
-        if (!mListPoints.isEmpty()){
+        if (!mListPoints.isEmpty()) {
             compareAndSort();
             for (MovePoints values : mListPoints) {
                 mSum += values.getGForce();
@@ -124,29 +124,28 @@ public class MoveService extends Service implements SensorEventListener {
             Logger.LOGI("Soma " + mSum);
 
             mMedia = mSum / mListPoints.size();
-            Logger.LOGW(">>>>>>>>Desvio Padrao: " + calculateStandardDeviation(mMedia));
+            Logger.LOGI(">>>>>>>>Desvio Padrao: " + calculateStandardDeviation(mMedia));
 
-            stdDevFilter(calculateStandardDeviation(mMedia),mMedia);
+            stdDevFilter(calculateStandardDeviation(mMedia), mMedia);
 
             for (MovePoints valuesNew : mListPointsFiltered) {
                 mNewSum += valuesNew.getGForce();
             }
             mNewMedia = mNewSum / mListPointsFiltered.size();
-            Logger.LOGW(" ----------------------------------mediaFILTRADA: " + mNewSum/mListPointsFiltered.size());
+            Logger.LOGI(" ----------------------------------mediaFILTRADA: " + mNewSum / mListPointsFiltered.size());
             if (mNewMedia > 1.15f)
                 setAlarms(ApplicationData.getAppContext());
-            Logger.LOGW("------------------------teste: " + teste + " ----------------------------------media: " + mMedia);
-            teste += 1;
+            Logger.LOGI("----------------------------------media: " + mMedia);
         }
         mListPointsFiltered.clear();
         mListPoints.clear();
-        mHandler.postDelayed(mRunnable, 7000);
+        mHandler.postDelayed(mRunnable, Constants.TIME_ABOVE_THRESHOLD);
     }
 
     /**
      * Compare each attribute of points, and use to sort
      */
-    private void compareAndSort(){
+    private void compareAndSort() {
         Comparator compareToSort = new Comparator<MovePoints>() {
             @Override
             public int compare(MovePoints lhs, MovePoints rhs) {
@@ -159,30 +158,29 @@ public class MoveService extends Service implements SensorEventListener {
     /**
      * Standard Deviation Filter used to eliminate peeks
      */
-    private void stdDevFilter (double stdDev,float mMedia ){
-        float mSum = 0;
-        for (MovePoints values : mListPoints){
-            if (mMedia + 2*stdDev > values.getGForce() ){
+    private void stdDevFilter(double stdDev, float mMedia) {
+        for (MovePoints values : mListPoints) {
+            if (mMedia + 2 * stdDev > values.getGForce()) {
                 mMovePointsFiltered = new MovePoints(values.getGForce(), values.getGForceTime());
                 mListPointsFiltered.add(mMovePointsFiltered);
             }
         }
 
-        if (!mListPointsFiltered.isEmpty()){
-            for (MovePoints valuesFiltered : mListPointsFiltered){
+        if (!mListPointsFiltered.isEmpty()) {
+            for (MovePoints valuesFiltered : mListPointsFiltered) {
                 //Logger.LOGI("values filtereeeddd" +valuesFiltered.getGForce());
             }
         }
     }
 
-    private double calculateStandardDeviation(float mMedia){
+    private double calculateStandardDeviation(float mMedia) {
         float stdDev = 0;
 
         for (MovePoints values : mListPoints) {
             stdDev += ((values.getGForce() - mMedia) * (values.getGForce() - mMedia));
         }
 
-        return Math.sqrt(stdDev/mListPoints.size());
+        return Math.sqrt(stdDev / mListPoints.size());
     }
 
     @Override
@@ -213,9 +211,6 @@ public class MoveService extends Service implements SensorEventListener {
                     mListPoints.add(mMovePoints);
                     stepTimeDetected = System.currentTimeMillis();
                     mMedia = (mMedia + gravityForce);
-                    stepCounter += 1;
-                    Logger.LOGI("Seconds" + TimeUnit.MILLISECONDS.toSeconds(stepTimeDetected));
-                    Logger.LOGI(Float.toString(gravityForce));
                 }
 
             }
@@ -230,6 +225,8 @@ public class MoveService extends Service implements SensorEventListener {
     }
 
     public void setAlarms(Context context) {
+        long nextAlarmMillis = System.currentTimeMillis() + Constants.IDLE_LIMIT;
+
         AlarmManager moveAlarm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(Constants.START_MOVE_ALARM);
 
@@ -238,9 +235,10 @@ public class MoveService extends Service implements SensorEventListener {
 
         moveAlarm.set(AlarmManager.RTC_WAKEUP, (System.currentTimeMillis() + Constants.IDLE_LIMIT),
                 pendingIntent);
-        notifyMovement(System.currentTimeMillis() + Constants.IDLE_LIMIT);
+        notifyMovement(nextAlarmMillis);
         mAlarmUp = true;
-        Log.i("SmartMotion", "Setting Alarm");
+
+        Logger.LOGI("Setting Alarm: " + SettingsUtils.currentMillisToDate(nextAlarmMillis, "HH:mm:ss"));
 
     }
 
@@ -262,12 +260,6 @@ public class MoveService extends Service implements SensorEventListener {
 
     public void setAlarmUp(boolean mAlarmUp) {
         this.mAlarmUp = mAlarmUp;
-    }
-
-    private PendingIntent createPendingIntent(Context context, String string) {
-        Intent intent = new Intent(context, MoveReceiver.class);
-        intent.putExtra(ONE_TIME, Boolean.FALSE);
-        return PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
     public void notifyMovement(long moveTimer) {

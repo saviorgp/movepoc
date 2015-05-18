@@ -1,14 +1,10 @@
 /*
- * Copyright (C) 2014 Sony Mobile Communications Inc.
+ * Copyright (C) 2015 Sony Mobile Communications Inc.
  * All rights, including trade secret rights, reserved.
  */
 
 package com.sonymobile.androidapp.moveconcept.utils;
 
-import android.content.Context;
-import android.content.Intent;
-import android.media.MediaScannerConnection;
-import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
 
@@ -16,11 +12,15 @@ import com.sonymobile.androidapp.moveconcept.persistence.ApplicationData;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+/**
+ * @author vntgago
+ * @created 15/05/2015
+ */
 
 public class Logger {
     private static File sFile;

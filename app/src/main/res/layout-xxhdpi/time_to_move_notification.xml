@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-/*******************************************************************
- * Copyright (C) 2012 Sony Mobile Communications AB.               *
- * All rights, including trade secret rights, reserved.            *
- ******************************************************************/
--->
+  Copyright (C) 2015 Sony Mobile Communications Inc.
+  All rights, including trade secret rights, reserved.
+  -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/widget_l_mainlayout"
     android:layout_width="match_parent"

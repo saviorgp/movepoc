@@ -1,7 +1,11 @@
 
+/*
+ * Copyright (C) 2015 Sony Mobile Communications Inc.
+ * All rights, including trade secret rights, reserved.
+ */
+
 package com.sonymobile.androidapp.moveconcept.view;
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -9,23 +13,17 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.graphics.Color;
-import android.media.MediaScannerConnection;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewParent;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.sonymobile.androidapp.moveconcept.R;
 import com.sonymobile.androidapp.moveconcept.liveware.control.view.MoveMotionListener;
@@ -35,15 +33,12 @@ import com.sonymobile.androidapp.moveconcept.service.MoveListener;
 import com.sonymobile.androidapp.moveconcept.service.MoveService;
 import com.sonymobile.androidapp.moveconcept.service.MoveService.LocalBinder;
 import com.sonymobile.androidapp.moveconcept.utils.Constants;
-import com.sonymobile.androidapp.moveconcept.utils.Logger;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 
 /**
- * @author Gabriel Gon�alves (gabriel.goncalves@venturus.org.br)
+ * @author Gabriel Goncalves (gabriel.goncalves@sonymobile.com)
  * @file MainActivity.java
  * @created 16/04/2015
  */
@@ -54,7 +49,6 @@ public class MainActivity extends FragmentActivity {
     MoveService mService;
     BroadcastReceiver mReceiver;
 
-    private TextView mTimer;
     private Button mSetAlarm;
     private Button mCancelAlarm;
     boolean mBound = false;
@@ -63,7 +57,6 @@ public class MainActivity extends FragmentActivity {
     private Button mBtnContinue;
 
     public static MoveMotionListener mListener;
-    private static String mPath = "/storage/emulated/legacy/MoveConcept/";
 
     private PageAdapter mPagerAdapter;
     ViewPager mPager;
@@ -75,19 +68,18 @@ public class MainActivity extends FragmentActivity {
 
         setContentView(R.layout.viewpager_layout);
 
-        mTimer = (TextView) findViewById(R.id.timer);
         mSetAlarm = (Button) findViewById(R.id.btn_set_alarm);
         mCancelAlarm = (Button) findViewById(R.id.btn_cancel_alarm);
         mBtnOk = (Button) findViewById(R.id.btn_ok);
         mBtnCancel = (Button) findViewById(R.id.btn_cancel);
         mBtnContinue = (Button) findViewById(R.id.btn_continue);
 
-
         /** Transparent StatusBar */
         Window window = getWindow();
         window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
         initializeViewPager();
+        //mService.setAlarms(getApplicationContext());
 
         mSetAlarm.setOnClickListener(new OnClickListener() {
 
@@ -95,10 +87,7 @@ public class MainActivity extends FragmentActivity {
             public void onClick(View v) {
                 /*if (mBound) {
                     mService.setAlarms(getApplicationContext());
-                }
-
-                new SingleMediaScanner(ApplicationData.getAppContext(), mPath);*/
-                Logger.LOGW("Start");
+                }*/
             }
         });
 
@@ -109,10 +98,29 @@ public class MainActivity extends FragmentActivity {
                /* if (mBound && mService.isAlarmUp()) {
                     mService.cancelAlarms(getApplicationContext());
                 }*/
-                Logger.LOGW("Stop");
             }
         });
     }
+
+    /**
+     * Callbacks from service
+     */
+    private ServiceConnection mConnection = new ServiceConnection() {
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            mBound = false;
+        }
+
+        @Override
+        public void onServiceConnected(ComponentName className, IBinder service) {
+            LocalBinder binder = (LocalBinder) service;
+            mService = binder.getService();
+            mBound = true;
+            mService.addMoveListener(moveListener);
+            mService.setAlarms(ApplicationData.getAppContext());
+        }
+    };
 
     private void initializeViewPager() {
         List<Fragment> fragments = new Vector<Fragment>();
@@ -123,6 +131,10 @@ public class MainActivity extends FragmentActivity {
         mPager = (ViewPager) findViewById(R.id.viewpager);
         mPager.setAdapter(mPagerAdapter);
         mPager.setPageTransformer(true, new CrossfadePageTransformer());
+
+        final Intent startMain = new Intent(Intent.ACTION_MAIN);
+        startMain.addCategory(Intent.CATEGORY_HOME);
+        startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         mPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -154,7 +166,6 @@ public class MainActivity extends FragmentActivity {
                         mBtnOk.setVisibility(View.VISIBLE);
                         mBtnCancel.setVisibility(View.VISIBLE);
                         break;
-
                 }
             }
 
@@ -181,6 +192,7 @@ public class MainActivity extends FragmentActivity {
                 v.setVisibility(View.VISIBLE);
                 mBtnOk.setVisibility(View.GONE);
                 mBtnCancel.setVisibility(View.GONE);
+                startActivity(startMain);
             }
         });
 
@@ -189,11 +201,9 @@ public class MainActivity extends FragmentActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(ApplicationData.getAppContext(), MoveService.class);
                 bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
-
-                Intent startMain = new Intent(Intent.ACTION_MAIN);
-                startMain.addCategory(Intent.CATEGORY_HOME);
-                startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(startMain);
+
+
             }
         });
     }
@@ -207,9 +217,12 @@ public class MainActivity extends FragmentActivity {
     protected void onStop() {
         super.onStop();
         if (mBound) {
+            //TODO
+            //Service
             // Logger.LOGD( "Unbinding...");
             //  mBound = false;
             //  startService(new Intent(ApplicationData.getAppContext(), MoveService.class));
+
         }
     }
 
@@ -248,9 +261,7 @@ public class MainActivity extends FragmentActivity {
                 } else if (action.equals(Constants.START_MOVE_ALARM)) {
 
                     Log.i("SmartMotion", "ReceivingFromActivity");
-                    mTimer.setText("Notification!!!");
                 }
-
             }
         };
 
@@ -258,42 +269,23 @@ public class MainActivity extends FragmentActivity {
         filter.addAction(Constants.START_MOVE_ALARM);
         filter.addAction((MoveExtensionService.EXTENSION_KEY));
         registerReceiver(mReceiver, filter);
+
+
     }
 
     public MoveListener moveListener = new MoveListener() {
 
         @Override
         public void onMovementChanged(long moveTimer) {
-            SimpleDateFormat simpleDate = new SimpleDateFormat("HH:mm:ss");
-            Date resultDate = new Date(moveTimer);
-            mTimer.setText("Next Notification:\n" + simpleDate.format(resultDate));
+            //For UI update
         }
 
         @Override
         public void onAlarmCanceled() {
-            mTimer.setText("Alarm Cancelled");
-        }
-
-    };
-
-    /**
-     * Callbacks from service
-     */
-    private ServiceConnection mConnection = new ServiceConnection() {
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-            mBound = false;
-        }
-
-        @Override
-        public void onServiceConnected(ComponentName className, IBinder service) {
-            LocalBinder binder = (LocalBinder) service;
-            mService = binder.getService();
-            mBound = true;
-            mService.addMoveListener(moveListener);
+            //For UI update
         }
     };
+
 
     /**
      * Animate Fragments

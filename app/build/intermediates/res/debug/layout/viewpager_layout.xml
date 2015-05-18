@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ @file ${NAME}
-  ~ @author Gabriel Gonçalves (gabriel.goncalves@venturus.org.br)
-  ~ @created ${DATE}
+  Copyright (C) 2015 Sony Mobile Communications Inc.
+  All rights, including trade secret rights, reserved.
   -->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"

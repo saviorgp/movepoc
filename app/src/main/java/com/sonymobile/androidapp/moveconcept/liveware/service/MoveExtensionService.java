@@ -1,3 +1,8 @@
+/*
+ * Copyright (C) 2015 Sony Mobile Communications Inc.
+ * All rights, including trade secret rights, reserved.
+ */
+
 package com.sonymobile.androidapp.moveconcept.liveware.service;
 
 import android.util.Log;

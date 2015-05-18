@@ -1,13 +1,6 @@
 /*
- * @file ${NAME}
- * @author Gabriel Gonçalves (gabriel.goncalves@venturus.org.br)
- * @created ${DATE}
- */
-
-/*
- * @file ${NAME}
- * @author Gabriel Gonçalves (gabriel.goncalves@venturus.org.br)
- * @created ${DATE}
+ * Copyright (C) 2015 Sony Mobile Communications Inc.
+ * All rights, including trade secret rights, reserved.
  */
 
 package com.sonymobile.androidapp.moveconcept.view;
@@ -17,7 +10,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.sonymobile.androidapp.moveconcept.R;

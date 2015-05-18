@@ -1,30 +1,21 @@
 /*
- * @file ${NAME}
- * @author Gabriel Gonçalves (gabriel.goncalves@venturus.org.br)
- * @created ${DATE}
+ * Copyright (C) 2015 Sony Mobile Communications Inc.
+ * All rights, including trade secret rights, reserved.
  */
-
 package com.sonymobile.androidapp.moveconcept.view;
-
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.sonymobile.androidapp.moveconcept.R;
-import com.sonymobile.androidapp.moveconcept.persistence.ApplicationData;
 import com.sonymobile.androidapp.moveconcept.utils.Constants;
-import com.sonymobile.androidapp.moveconcept.utils.Logger;
 
 /**
  * InitialFragment
