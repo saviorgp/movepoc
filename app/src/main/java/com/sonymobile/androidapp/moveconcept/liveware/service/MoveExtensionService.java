@@ -15,6 +15,7 @@ import com.sonymobile.androidapp.moveconcept.liveware.control.view.EllisControlE
 
 /**
  * Created by vntgago on 24/04/2015.
+ *
  */
 public class MoveExtensionService extends ExtensionService{
     public static final String EXTENSION_KEY = "com.sonymobile.androidapp.moveconcept.liveware.extension_key";
