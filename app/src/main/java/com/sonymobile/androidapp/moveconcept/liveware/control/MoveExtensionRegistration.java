@@ -23,6 +23,7 @@ import java.util.List;
 
 /**
  * Every supported host application need to be registered
+ *
  */
 public class MoveExtensionRegistration extends RegistrationInformation {
 
