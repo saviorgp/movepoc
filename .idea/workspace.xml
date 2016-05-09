@@ -54,13 +54,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="27958804-3c0a-4d82-94a4-e97a5129c74a" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\sony\movepoc\MoveConcept.iml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/SmartExtensionUtils.xml" afterPath="$PROJECT_DIR$/.idea/libraries/SmartExtensionUtils.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/gradle.xml" afterPath="$PROJECT_DIR$/.idea/gradle.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" afterPath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MoveConcept.iws" />
@@ -2465,7 +2458,13 @@
       <option name="project" value="LOCAL" />
       <updated>1462831537993</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="teste5">
+      <created>1462831630047</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1462831630047</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -2540,7 +2539,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="teste4" />
-    <option name="LAST_COMMIT_MESSAGE" value="teste4" />
+    <MESSAGE value="teste5" />
+    <option name="LAST_COMMIT_MESSAGE" value="teste5" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
