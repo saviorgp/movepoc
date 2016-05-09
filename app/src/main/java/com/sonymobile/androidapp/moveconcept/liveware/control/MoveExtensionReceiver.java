@@ -15,6 +15,7 @@ import com.sonymobile.androidapp.moveconcept.liveware.service.MoveExtensionServi
 /**
  * MoveExtensionReceiver
  * Created by vntgago on 24/04/2015.
+ *
  */
 
 public class MoveExtensionReceiver extends BroadcastReceiver{
