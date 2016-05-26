@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="SmartextEnsionUtils">
+  <library name="SmartExtensionUtils">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/app/libs/SmartextEnsionUtils.jar!/" />
+      <root url="jar://$PROJECT_DIR$/app/libs/SmartExtensionUtils.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
