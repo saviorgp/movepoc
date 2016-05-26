@@ -21,6 +21,9 @@ public class Constants {
 
     public static final String SHARED_PREFERENCES_NAME = "moveconcept_preferences";
 
+
+
+
     /**
      * SharedPreferences Key
      */
